@@ -17,22 +17,32 @@ This skill does *not* do literature search, citation discovery, or experiment de
 
 ## The two modes
 
-- **Review (default).** Detect scope → gather context → assess against only the relevant style guidelines and the review rubric → run the review self-check → deliver structured feedback. **Do not rewrite the draft.** End by offering to apply specific points.
+- **Review (default).** Set scope, depth, and focus → gather context → assess against only the relevant style guidelines and the review rubric → run the review self-check → deliver structured feedback. **Do not rewrite the draft.** End by offering to apply specific points.
 - **Revise (only when asked).** After the author picks which feedback to act on — or explicitly asks for a rewrite up front — produce the revised text for *those* parts. Skip this entirely unless the author requests it.
 
 Default to Review mode. Switch to Revise mode only on an explicit request such as "rewrite this", "apply points 2 and 4", or "now revise it".
 
 The numbered steps below are the procedure: Steps 1–3 carry out a review; Step 4 is the revise mode and runs only when requested.
 
-## Step 1 — Determine scope
+## Step 1 — Set scope, depth, and focus
 
-Classify the task into one tier. If it is genuinely ambiguous, ask the user; otherwise infer from the request.
+Before reviewing, decide what kind of review the user wants. Do **not** ask reflexively: if the request, pasted text, or file context makes the intent clear, infer sensible defaults and proceed. Ask one short clarification question only when the scope, depth, or focus is ambiguous enough that it would materially change the review. When asking, state the default you would use if the user has no preference.
+
+Classify the task into one tier:
 
 | Tier | Covers | Typical requests |
 |------|--------|------------------|
 | **Micro** | a sentence or a single paragraph | "review this paragraph", "is this sentence clear?", "tighten feedback on this" |
 | **Section** | one (sub)section | "review the related-work subsection", "critique the experimental setup", "check the contributions list" |
 | **Chapter / thesis** | a full chapter or the whole document | "review the methods chapter", "give feedback on the introduction", "review my whole thesis" |
+
+Then set review depth and focus:
+
+- **Depth** — quick pass, standard review, or deep review. Default to standard review unless the user asks for a quick check or a deep critique.
+- **Focus** — wording/style, sentence structure, local flow, argument/section structure, scientific precision, claim→evidence support, or consistency/conventions.
+- **Micro default** — assume a targeted prose review focused on wording, sentence structure, local flow, clarity, and local terminology. Do not ask first for a normal single-paragraph review.
+- **Section default** — assume a standard review of section role, organization, transitions, claims/evidence, terminology, and prose quality. Ask if the user may want only wording polish or only structural critique.
+- **Chapter / thesis default** — ask for depth and focus before a full review unless the user already specified them. If proceeding without clarification, use a standard structural review focused on narrative arc, claim→evidence support, consistency, and high-impact prose issues.
 
 ## Step 2 — Gather context (proportional to scope)
 

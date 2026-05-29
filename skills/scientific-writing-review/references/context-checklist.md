@@ -25,7 +25,7 @@ Do **not** load the whole document to review a micro snippet.
 
 - [ ] The **outline / table of contents** and where this piece sits in it.
 - [ ] The **narrative arc**: the through-line of the document and what each chapter/section must accomplish.
-- [ ] **Cross-section terminology and notation consistency** (symbols, abbreviations, capitalisation, naming of the method/system).
+- [ ] **Cross-section terminology and notation consistency** (symbols, abbreviations, capitalization, naming of the method/system).
 - [ ] The **claim→evidence map**: which claims this part makes and which results/sections support them.
 - [ ] **Forward/backward references** (\\ref, \\cref) and dependencies between parts.
 - [ ] Front-matter conventions: how the contributions, problem statement, and scope are framed elsewhere.

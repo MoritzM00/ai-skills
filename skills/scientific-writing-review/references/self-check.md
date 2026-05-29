@@ -18,6 +18,7 @@ looks like a factual, citation, or claim issue.
 ## Review output
 
 - [ ] Feedback stays in Review mode: no full rewritten sentences, paragraphs, or sections unless the user explicitly asked for revision.
+- [ ] Scope, depth, and focus were either clear enough to infer or clarified before reviewing; a micro paragraph review did not ask unnecessary intake questions.
 - [ ] Each finding has a concrete location, a severity tag, and a reason tied to a style principle, detected convention, context fact, or argument problem.
 - [ ] The review does not claim a factual, statistical, or citation error unless the supplied material supports that judgment; otherwise it flags the point as something to verify.
 - [ ] Context gathering stayed proportional to the tier; a micro review did not turn into a document-level audit.
