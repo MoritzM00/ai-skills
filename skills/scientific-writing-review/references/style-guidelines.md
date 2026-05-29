@@ -186,13 +186,16 @@ possibly (degree of certainty).
   as a way to add emphasis, announce examples, or signpost a sentence. In
   revisions, remove colons unless a colon is required by syntax or convention
   (e.g. LaTeX labels/citation keys, ratios, times, title/subtitle formats, code,
-  or template fields). Prefer sentence splits or explicit connectives.
+  or template fields) or the surrounding document clearly and consistently uses
+  them that way. Prefer sentence splits or explicit connectives. This governs
+  prose you generate; when reviewing, flag the author's colons only if they are
+  genuinely excessive.
 
   | Avoid | Prefer |
   |---|---|
   | "The issue is structural: the paragraph combines motivation, method, and contribution in one sentence." | "This is a structural issue because the paragraph combines motivation, method, and contribution in one sentence." |
   | "The benchmark has one advantage: it combines genuine accidents with staged and synthetic falls." | "The benchmark's advantage is that it combines genuine accidents with staged and synthetic falls." |
-  | "We evaluate three aspects: implementation effort, inference cost, and labeled data needs." | "We evaluate implementation effort, inference cost, and labeled data needs." |
+  | "We evaluate three aspects: implementation effort, inference cost, and labeled data needs." | "We evaluate three aspects — implementation effort, inference cost, and labeled data needs." |
 
   When removing a colon, choose the replacement that preserves the relationship.
   Use "because" when the second part gives a reason, "which" or "that" when it

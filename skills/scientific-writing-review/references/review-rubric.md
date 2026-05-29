@@ -32,8 +32,8 @@ deliverable — **do not rewrite the draft here** (that is Step 4, and only on r
 ### Micro — sentence / paragraph
 - Clarity and precision; ambiguous referents; overlong sentences.
 - Braided sentences that combine several rhetorical jobs in one chain.
-- Colon overuse; prose should not rely on colons for emphasis, examples, or
-  signposting.
+- Colon overuse — flag only genuinely excessive reliance on colons for emphasis,
+  examples, or signposting, not every well-formed colon.
 - Local flow and transitions between sentences.
 - Word choice, redundancy, filler.
 - Tense/voice/person consistency with the passage and the guidelines.

@@ -56,6 +56,8 @@ Applies to both reviewing and revising. Read `references/context-checklist.md` f
 
 This is the skill's main job. Read `references/review-rubric.md` (what to look for at each tier and how to structure the feedback). Use `references/style-guidelines.md` proportionally: for **Micro**, consult only the style sections needed for the issue at hand; for **Section** and **Chapter / thesis**, read the full style guide unless the task is narrowly bounded. Then produce **structured feedback** — do not rewrite the draft.
 
+Let the **depth** and **focus** set in Step 1 shape the pass. A **quick** review surfaces only the few highest-severity findings; a **standard** review covers the rubric for the tier; a **deep** review works the rubric exhaustively. Restrict the rubric sections and style guidelines you apply to the chosen **focus** (e.g. wording only, or argument structure only) rather than reporting everything.
+
 Each finding should: locate the issue (quote a short span or give the line/section), say what is wrong and why (tie it to a guideline or to the argument/context), and rate its severity. You may point toward a fix in a phrase, but do **not** supply full rewritten paragraphs here — that is Step 4.
 
 Before presenting the review, run the **Review output** checks in `references/self-check.md`. End the review by listing the findings the author can choose from, and offer: "Tell me which of these to apply and I'll revise those parts."
@@ -66,6 +68,6 @@ Skip this step unless the author asks for a rewrite (e.g. "apply points 2 and 4"
 
 Produce **LaTeX** by default unless the surrounding file is clearly Markdown or plain prose. Match the existing document: reuse its macros, citation commands (`\cite`, `\citet`, `\citep`, …), math notation, environments, and sectioning. Do not introduce notation or terminology that conflicts with what is already defined (see Step 2).
 
-Do **not** introduce colons in revised prose. Prefer a sentence split, comma, or explicit connective instead. Use a colon only when it is required by syntax or convention, such as a LaTeX label/citation key, ratio, time, title/subtitle, code, or a template field that already requires one.
+As a house preference for text you generate, avoid introducing colons in revised prose — prefer a sentence split, comma, or explicit connective. Use a colon only when syntax or convention requires one (a LaTeX label/citation key, ratio, time, title/subtitle, code, or template field), or when the surrounding document clearly and consistently uses colons in that position. This governs your own output; it is not a defect to flag in the author's draft (the rubric flags only genuinely excessive colon use).
 
 Preserve the author's meaning, claims, and voice — improve clarity, structure, and conformance to style, but never invent results, citations, or quantitative claims. Then run `references/self-check.md` for the relevant tier before presenting the revision, and flag (rather than silently fix) anything that looks like a factual or citation issue.
