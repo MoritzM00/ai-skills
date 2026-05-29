@@ -7,7 +7,7 @@ looks like a factual, citation, or claim issue.
 
 - [ ] Conforms to `style-guidelines.md`. Note any rule you could not verify.
 - [ ] Uses American English spelling by default (e.g. "organize", not "organise") unless the user, venue, or surrounding document clearly requires another variant.
-- [ ] Uses colons very selectively; any colon should introduce material that genuinely explains, specifies, or illustrates what precedes it.
+- [ ] Avoids colons in revised prose. Scan every colon in generated prose and remove it unless syntax or convention requires it (e.g. LaTeX labels/citation keys, ratios, times, title/subtitle formats, code, or template fields).
 - [ ] Avoids braided sentences: no sentence should chain several rhetorical jobs (e.g. contrast, rationale, method, dataset, and tradeoff) unless the length is technically necessary.
 - [ ] If the detected user, venue, or document requirements call for **anonymization** (e.g. double-blind submission), no de-anonymizing content was introduced — no author names, identifying self-citations, or revealing links/acknowledgements.
 - [ ] No invented results, citations, or quantitative claims.

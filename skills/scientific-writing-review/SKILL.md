@@ -66,4 +66,6 @@ Skip this step unless the author asks for a rewrite (e.g. "apply points 2 and 4"
 
 Produce **LaTeX** by default unless the surrounding file is clearly Markdown or plain prose. Match the existing document: reuse its macros, citation commands (`\cite`, `\citet`, `\citep`, …), math notation, environments, and sectioning. Do not introduce notation or terminology that conflicts with what is already defined (see Step 2).
 
+Do **not** introduce colons in revised prose. Prefer a sentence split, comma, or explicit connective instead. Use a colon only when it is required by syntax or convention, such as a LaTeX label/citation key, ratio, time, title/subtitle, code, or a template field that already requires one.
+
 Preserve the author's meaning, claims, and voice — improve clarity, structure, and conformance to style, but never invent results, citations, or quantitative claims. Then run `references/self-check.md` for the relevant tier before presenting the revision, and flag (rather than silently fix) anything that looks like a factual or citation issue.

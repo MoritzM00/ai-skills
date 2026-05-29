@@ -182,9 +182,24 @@ possibly (degree of certainty).
   showed improvement."
 - **Comma in a compound predicate:** no comma — "We measured BP and recorded
   symptoms" (one subject, two verbs).
-- **Colon use:** use colons very selectively. Reserve them for places where the
-  second clause genuinely explains, specifies, or illustrates the first; don't
-  use them as a default way to add emphasis or signpost a sentence.
+- **Avoid colons in prose.** Do not use colons as a default sentence pattern or
+  as a way to add emphasis, announce examples, or signpost a sentence. In
+  revisions, remove colons unless a colon is required by syntax or convention
+  (e.g. LaTeX labels/citation keys, ratios, times, title/subtitle formats, code,
+  or template fields). Prefer sentence splits or explicit connectives.
+
+  | Avoid | Prefer |
+  |---|---|
+  | "The issue is structural: the paragraph combines motivation, method, and contribution in one sentence." | "This is a structural issue because the paragraph combines motivation, method, and contribution in one sentence." |
+  | "The benchmark has one advantage: it combines genuine accidents with staged and synthetic falls." | "The benchmark's advantage is that it combines genuine accidents with staged and synthetic falls." |
+  | "We evaluate three aspects: implementation effort, inference cost, and labeled data needs." | "We evaluate implementation effort, inference cost, and labeled data needs." |
+
+  When removing a colon, choose the replacement that preserves the relationship.
+  Use "because" when the second part gives a reason, "which" or "that" when it
+  specifies the first part, and "including" when it introduces examples. If the
+  colon introduces a list, fold the list into the sentence. Split into two
+  sentences only when both parts can stand naturally on their own and the result
+  does not feel clipped.
 - **Pronoun agreement:** prefer pluralizing — "Participants completed their
   questionnaires" over "Each participant completed their questionnaire".
 - **Subject–verb agreement with collective subjects:** "The group of participants
