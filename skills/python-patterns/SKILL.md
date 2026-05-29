@@ -56,19 +56,19 @@ some_module.setup()  # What does this do?
 Python prefers exception handling over checking conditions.
 
 ```python
-# Good: EAFP style
-def get_value(dictionary: dict, key: str) -> Any:
+# Good: EAFP style - no race between check and open
+def read_config(path: Path) -> str:
     try:
-        return dictionary[key]
-    except KeyError:
-        return default_value
+        return path.read_text()
+    except FileNotFoundError:
+        return ""
 
 # Bad: LBYL (Look Before You Leap) style
-def get_value(dictionary: dict, key: str) -> Any:
-    if key in dictionary:
-        return dictionary[key]
-    else:
-        return default_value
+# The file can be deleted between the exists() check and read_text()
+def read_config(path: Path) -> str:
+    if path.exists():
+        return path.read_text()
+    return ""
 ```
 
 ## Type Hints

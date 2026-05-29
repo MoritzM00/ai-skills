@@ -406,6 +406,8 @@ def test_api_error_handling(api_call_mock):
 ### Mocking Context Managers
 
 ```python
+from unittest.mock import patch, mock_open
+
 @patch("builtins.open", new_callable=mock_open)
 def test_file_reading(mock_file):
     """Test file reading with mocked open."""
@@ -449,6 +451,8 @@ class TestUserService:
 ### Mock Property
 
 ```python
+from unittest.mock import Mock, PropertyMock
+
 @pytest.fixture
 def mock_config():
     """Create a mock with a property."""
@@ -486,9 +490,17 @@ async def test_async_with_fixture(async_client):
 ### Async Fixture
 
 ```python
-@pytest.fixture
+import pytest_asyncio
+
+@pytest_asyncio.fixture
 async def async_client():
-    """Async fixture providing async test client."""
+    """Async fixture providing async test client.
+
+    Use @pytest_asyncio.fixture (not @pytest.fixture) for async fixtures;
+    under pytest-asyncio's default strict mode a plain @pytest.fixture
+    yields an unawaited async generator. Alternatively, set
+    asyncio_mode = auto in your pytest config.
+    """
     app = create_app()
     async with app.test_client() as client:
         yield client
