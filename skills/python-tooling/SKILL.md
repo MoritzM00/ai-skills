@@ -102,7 +102,7 @@ dev = [
 ]
 
 [tool.ruff]
-line-length = 88
+line-length = 100   # ruff's built-in default is 88
 target-version = "py312"
 
 [tool.ruff.lint]
@@ -119,10 +119,14 @@ select = [
     "NPY",  # NumPy-specific rules (deprecated API usage)
     "PD",   # pandas-vet (idiomatic pandas; some rules are opinionated)
     "A",    # flake8-builtins (don't shadow list, dict, id, ...)
+    "D",    # pydocstyle (enforce docstrings; see convention below)
 ]
 extend-ignore = [
-    "E501",   # line length (let the formatter handle wrapping)
-    "A003",   # builtin as a class attribute is fine (e.g. model.id, .type)
+    "E501",    # line length (let the formatter handle wrapping)
+    "A003",    # builtin as a class attribute is fine (e.g. model.id, .type)
+    "D100",    # Missing docstring in public module
+    "D104",    # Missing docstring in public package
+    "D203",    # blank line required before class docstring
     # "PD901",  # allow `df` as a DataFrame variable name
     # "PD011",  # .values false-positives on non-pandas objects
 ]
@@ -145,7 +149,8 @@ addopts = "--cov=mypackage --cov-report=term-missing"
 
 `ruff` replaces flake8, isort, and black with a single fast tool.
 
-- `ruff format` is a near drop-in for black (same 88-column default).
+- `ruff format` is a near drop-in for black; set `line-length` in `[tool.ruff]`
+  (the example uses 100; ruff's own default is 88).
 - Import sorting is the `I` lint rule — `ruff check --fix .` sorts imports, so a
   separate `isort` run is unnecessary.
 - Add rule families to `[tool.ruff.lint].select` as needed (e.g. `UP` for
