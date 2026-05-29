@@ -9,3 +9,5 @@
 
 skills/example-workflow claude,codex
 skills/scientific-writing-review claude,codex
+skills/python-testing claude,codex
+skills/python-patterns claude,codex
