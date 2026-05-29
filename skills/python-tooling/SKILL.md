@@ -28,18 +28,20 @@ through a single `pyproject.toml`.
 | Testing | `pytest` (via `uv run`) | — |
 
 `uv` and `ruff` are production-ready. `ty` is Astral's type checker and is still
-pre-1.0 (preview) — pin it loosely and expect its config schema to evolve.
+pre-1.0 (preview) — keep it locked with `uv.lock` and expect its config schema
+to evolve.
 
 ## Essential Commands
 
 ```bash
 # Linting and formatting (ruff handles both)
-ruff check .          # lint
-ruff check --fix .    # lint and autofix
-ruff format .         # format
+uv run ruff check .          # lint
+uv run ruff check --fix .    # lint and autofix
+uv run ruff format .         # format
 
 # Type checking (ty)
-ty check
+uv run ty check
+uv run ty check --watch
 
 # Testing
 uv run pytest --cov=mypackage --cov-report=html
@@ -58,8 +60,11 @@ uv run <command>      # run a command inside the project environment
 `uv.lock` lockfile for reproducible installs.
 
 ```bash
-# Start a new project (creates pyproject.toml, .venv, uv.lock)
+# Start a new project (creates pyproject.toml, README, main.py, .python-version)
 uv init mypackage
+
+# Create/sync the virtual environment and lockfile
+uv sync
 
 # Add / remove dependencies (updates pyproject.toml and uv.lock)
 uv add "pydantic>=2.0.0"
@@ -98,7 +103,7 @@ dev = [
     "pytest>=8.0.0",
     "pytest-cov>=5.0.0",
     "ruff>=0.6.0",
-    "ty>=0.0.1",
+    "ty",
 ]
 
 [tool.ruff]
@@ -137,8 +142,9 @@ extend-ignore = [
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
-[tool.ty.environment]
-python-version = "3.12"
+[tool.ty.src]
+# Standard src-layout project; omit this table to check every Python file.
+include = ["src", "tests"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -157,26 +163,39 @@ addopts = "--cov=mypackage --cov-report=term-missing"
   pyupgrade, `B` for flake8-bugbear, `SIM` for flake8-simplify).
 
 ```bash
-ruff check --fix . && ruff format .   # typical pre-commit sequence
+uv run ruff check --fix . && uv run ruff format .   # typical local sequence
 ```
 
 ## ty: Type Checking
 
-`ty` is Astral's type checker, configured under `[tool.ty]`.
+`ty` is Astral's type checker. It can run without project-specific config; add a
+`[tool.ty]` section only when you need to scope file selection, configure a
+non-standard source root, or change rule severities.
 
 ```bash
-ty check          # check the project
-ty check src/     # check a specific path
+uv run ty check          # check the project using the uv environment
+uv run ty check src/     # check a specific path
+uv run ty check --watch  # recheck incrementally while editing
 ```
 
-Pin `ty` loosely (`ty>=0.0.1`) while it is in preview; verify config keys against
-the installed version, since the schema is still changing.
+Add `ty` with `uv add --dev ty` and commit the resulting `uv.lock`; the lockfile
+pins the exact tool version. Upgrade deliberately with
+`uv lock --upgrade-package ty`.
+
+- Do not duplicate `python-version` when it matches `[project].requires-python`;
+  ty infers the lower bound from `requires-python`.
+- Do not set `environment.python` for normal uv projects; `uv run` exposes the
+  project environment to ty.
+- Use `[tool.ty.environment].root` only for non-standard layouts (for example,
+  source under `app/` instead of project root or `src/`).
+- `ty.toml` takes precedence over `[tool.ty]` in `pyproject.toml`; avoid keeping
+  both in the same directory unless that precedence is intentional.
 
 ### Adopting ty incrementally
 
 Turning a type checker on across an existing codebase produces a wall of errors.
 Roll it out gradually: scope it to the code you have cleaned up, and don't fail
-the build on warnings yet.
+the build on warnings until the checked surface is stable.
 
 ```toml
 [tool.ty.src]
@@ -186,21 +205,25 @@ exclude = [
     "src/mypackage/data/**",
     "src/mypackage/legacy/**",
 ]
-
-[tool.ty.terminal]
-# See warnings without failing CI while the codebase is brought up to standard.
-error-on-warning = false
-output-format = "full"
 ```
 
-As modules get typed, shrink `exclude` and eventually flip `error-on-warning`
-to `true`.
+As modules get typed, expand `include` and shrink `exclude`. Once warnings are
+treated as build-breaking policy, add:
+
+```toml
+[tool.ty.terminal]
+error-on-warning = true
+```
+
+`ty` does not have a strict mode yet and does not require annotations on its own.
+If a project needs mandatory argument or return annotations, opt into Ruff's
+`ANN` rules alongside ty.
 
 ## Pre-commit Hooks
 
-Run `ruff` and `ty` as `repo: local` hooks with `language: system`, so they use
-the exact versions pinned in your dev dependency group — no separate mirror
-version to keep in sync with CI.
+Run `ruff` and `ty` as `repo: local` hooks through `uv run`, so they use the
+versions resolved from your dev dependency group and locked in `uv.lock` — no
+separate mirror version to keep in sync with CI.
 
 ```yaml
 # .pre-commit-config.yaml
@@ -224,17 +247,17 @@ repos:
     hooks:
       - id: ruff-check
         name: ruff check
-        entry: ruff check --fix
+        entry: uv run ruff check --fix
         language: system
         types_or: [python, pyi, jupyter]   # also lints notebooks
       - id: ruff-format
         name: ruff format
-        entry: ruff format
+        entry: uv run ruff format
         language: system
         types_or: [python, pyi, jupyter]
       - id: ty-check
         name: ty
-        entry: ty check
+        entry: uv run ty check
         language: system
         types: [python]
         pass_filenames: false   # ty checks the whole project, not per-file
@@ -247,8 +270,8 @@ include `jupyter` in `types_or` so notebooks are linted and formatted too.
 Install the hooks once with `uv run pre-commit install`. When starting work on a
 project, run `uv run pre-commit autoupdate` to bump the pinned `rev:` tags of the
 remote hook repos (e.g. `nbstripout`, `pre-commit-hooks`) to their latest
-releases. The `repo: local` hooks aren't pinned here — they track the `ruff`/`ty`
-versions in your dev dependency group, so bump those via `uv lock --upgrade`.
+releases. The `repo: local` hooks aren't pinned here — they use the `ruff`/`ty`
+versions from the uv-managed environment, so bump those via `uv lock --upgrade`.
 
 ## CI Sketch
 
@@ -271,10 +294,10 @@ uv run pytest --cov=mypackage
 | Sync environment | `uv sync` |
 | Refresh lockfile | `uv lock --upgrade` |
 | Run in env | `uv run <cmd>` |
-| Lint | `ruff check .` |
-| Lint + autofix | `ruff check --fix .` |
-| Format | `ruff format .` |
-| Type check | `ty check` |
+| Lint | `uv run ruff check .` |
+| Lint + autofix | `uv run ruff check --fix .` |
+| Format | `uv run ruff format .` |
+| Type check | `uv run ty check` |
 
 **Remember**: one `pyproject.toml`, three tools (`uv`, `ruff`, `ty`). Prefer
 `uv run` over manually activating a virtualenv so commands always use the

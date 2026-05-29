@@ -384,7 +384,7 @@ def test_database_connection(connect_mock):
     connect_mock.return_value = MockConnection()
 
     db = Database()
-    db.connect()
+    db.connect("localhost")
 
     connect_mock.assert_called_once_with("localhost")
 ```
@@ -589,7 +589,10 @@ def test_with_tmp_path(tmp_path):
     # tmp_path automatically cleaned up
 ```
 
-### Testing with tmpdir Fixture
+### Testing with tmpdir Fixture (Legacy)
+
+Prefer `tmp_path` for new tests. Use `tmpdir` when maintaining older code that
+expects `py.path.local`.
 
 ```python
 def test_with_tmpdir(tmpdir):
@@ -672,7 +675,7 @@ class TestUserService:
 
 ## Common Patterns
 
-### Testing API Endpoints (FastAPI/Flask)
+### Testing Flask API Endpoints
 
 ```python
 @pytest.fixture

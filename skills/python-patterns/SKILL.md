@@ -255,14 +255,17 @@ def process_file(path: str) -> str:
 
 ```python
 from contextlib import contextmanager
+import time
 
 @contextmanager
 def timer(name: str):
     """Context manager to time a block of code."""
     start = time.perf_counter()
-    yield
-    elapsed = time.perf_counter() - start
-    print(f"{name} took {elapsed:.4f} seconds")
+    try:
+        yield
+    finally:
+        elapsed = time.perf_counter() - start
+        print(f"{name} took {elapsed:.4f} seconds")
 
 # Usage
 with timer("data processing"):
@@ -521,18 +524,18 @@ def process_all(datasets: list[list[int]]) -> list[int]:
 
 ```python
 import asyncio
+import aiohttp
 
-async def fetch_async(url: str) -> str:
+async def fetch_async(session: aiohttp.ClientSession, url: str) -> str:
     """Fetch a URL asynchronously."""
-    import aiohttp
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            return await response.text()
+    async with session.get(url) as response:
+        return await response.text()
 
 async def fetch_all(urls: list[str]) -> dict[str, str]:
     """Fetch multiple URLs concurrently."""
-    tasks = [fetch_async(url) for url in urls]
-    results = await asyncio.gather(*tasks, return_exceptions=True)
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch_async(session, url) for url in urls]
+        results = await asyncio.gather(*tasks)
     return dict(zip(urls, results))
 ```
 
