@@ -5,7 +5,7 @@ looks like a factual, citation, or claim issue.
 
 ## All tiers
 
-- [ ] Conforms to `style-guidelines.md` (once filled). Note any rule you could not verify.
+- [ ] Conforms to `style-guidelines.md`. Note any rule you could not verify.
 - [ ] If `style-guidelines.md` says the target requires **anonymisation** (e.g. double-blind submission), no de-anonymising content was introduced — no author names, identifying self-citations, or revealing links/acknowledgements.
 - [ ] No invented results, citations, or quantitative claims.
 - [ ] Notation and terminology match what the document already defines; nothing redefined or conflicting.

@@ -15,12 +15,14 @@ This skill is **field- and venue-neutral**: it hardcodes no conventions. Citatio
 
 This skill does *not* do literature search, citation discovery, or experiment design. If the request needs those, say so and stop. (The ARS `academic-paper` pipeline covers the full research-to-publication workflow.)
 
-## The two-step process
+## The two modes
 
-1. **Review (default).** Detect scope → gather context → assess against the style guidelines and the review rubric → deliver structured feedback. **Do not rewrite the draft.** End by offering to apply specific points.
-2. **Revise (only when asked).** After the author picks which feedback to act on — or explicitly asks for a rewrite up front — produce the revised text for *those* parts. Skip this step entirely unless the author requests it.
+- **Review (default).** Detect scope → gather context → assess against the style guidelines and the review rubric → deliver structured feedback. **Do not rewrite the draft.** End by offering to apply specific points.
+- **Revise (only when asked).** After the author picks which feedback to act on — or explicitly asks for a rewrite up front — produce the revised text for *those* parts. Skip this entirely unless the author requests it.
 
-Default to Step 1. Move to Step 2 only on an explicit request such as "rewrite this", "apply points 2 and 4", or "now revise it".
+Default to Review mode. Switch to Revise mode only on an explicit request such as "rewrite this", "apply points 2 and 4", or "now revise it".
+
+The numbered steps below are the procedure: Steps 1–3 carry out a review; Step 4 is the revise mode and runs only when requested.
 
 ## Step 1 — Determine scope
 
