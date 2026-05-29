@@ -1,0 +1,128 @@
+#!/usr/bin/env sh
+set -eu
+
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+MANIFEST="$ROOT/external/claude-plugins.txt"
+DRY_RUN=0
+
+usage() {
+  cat <<'EOF'
+Usage: scripts/install-claude-plugins [--dry-run]
+
+Installs Claude Code plugin marketplaces and plugins from:
+  external/claude-plugins.txt
+
+This does not install or manage skills in ~/.claude/skills.
+EOF
+}
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --dry-run)
+      DRY_RUN=1
+      shift
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      usage >&2
+      exit 2
+      ;;
+  esac
+done
+
+if ! command -v claude >/dev/null 2>&1; then
+  printf 'Missing required command: claude\n' >&2
+  exit 1
+fi
+
+if [ ! -f "$MANIFEST" ]; then
+  printf 'Missing manifest: %s\n' "$MANIFEST" >&2
+  exit 1
+fi
+
+run() {
+  if [ "$DRY_RUN" -eq 1 ]; then
+    printf '+ %s\n' "$*"
+  else
+    "$@"
+  fi
+}
+
+marketplace_name_from_source() {
+  source=$1
+  source=${source%.git}
+  printf '%s\n' "${source##*/}"
+}
+
+marketplace_configured() {
+  source=$1
+  name=$2
+  claude plugin marketplace list 2>/dev/null | grep -Fq "$source" && return 0
+  claude plugin marketplace list 2>/dev/null | grep -Fq "$name" && return 0
+  return 1
+}
+
+plugin_scope_installed() {
+  plugin=$1
+  scope=$2
+
+  claude plugin list 2>/dev/null | awk -v plugin="$plugin" -v scope="$scope" '
+    index($0, plugin) { in_plugin = 1 }
+    in_plugin && index($0, "Scope: " scope) { found = 1 }
+    $0 == "" { in_plugin = 0 }
+    END { exit found ? 0 : 1 }
+  '
+}
+
+install_one() {
+  source=$1
+  plugin=$2
+  scope=$3
+
+  case "$scope" in
+    user|project|local) ;;
+    *)
+      printf 'Unsupported scope for %s: %s\n' "$plugin" "$scope" >&2
+      exit 1
+      ;;
+  esac
+
+  case "$plugin" in
+    *@*) marketplace=${plugin##*@} ;;
+    *) marketplace=$(marketplace_name_from_source "$source") ;;
+  esac
+
+  if marketplace_configured "$source" "$marketplace"; then
+    printf 'Marketplace already configured: %s\n' "$marketplace"
+  else
+    run claude plugin marketplace add "$source"
+  fi
+
+  if plugin_scope_installed "$plugin" "$scope"; then
+    printf 'Plugin already installed: %s (%s)\n' "$plugin" "$scope"
+  else
+    run claude plugin install --scope "$scope" "$plugin"
+  fi
+}
+
+while IFS= read -r line || [ -n "$line" ]; do
+  set -- $line
+
+  case "${1:-}" in
+    ""|\#*) continue ;;
+  esac
+
+  source=$1
+  plugin=${2:-}
+  scope=${3:-user}
+
+  if [ -z "$plugin" ]; then
+    printf 'Manifest line missing plugin for marketplace source: %s\n' "$source" >&2
+    exit 1
+  fi
+
+  install_one "$source" "$plugin" "$scope"
+done < "$MANIFEST"

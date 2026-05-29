@@ -1,0 +1,185 @@
+#!/usr/bin/env sh
+set -eu
+
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+MANIFEST="$ROOT/managed-skills.txt"
+MODE=symlink
+DRY_RUN=0
+TARGET_FILTER=all
+
+usage() {
+  cat <<'EOF'
+Usage: scripts/install [--copy] [--dry-run] [--target claude|codex|all]
+
+Installs manifest-listed skills into agent skill directories.
+
+Default mode is symlink. Use --copy for independent copies.
+EOF
+}
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --copy)
+      MODE=copy
+      shift
+      ;;
+    --dry-run)
+      DRY_RUN=1
+      shift
+      ;;
+    --target)
+      if [ "$#" -lt 2 ]; then
+        usage >&2
+        exit 2
+      fi
+      TARGET_FILTER=$2
+      shift 2
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      usage >&2
+      exit 2
+      ;;
+  esac
+done
+
+case "$TARGET_FILTER" in
+  all|claude|codex) ;;
+  *)
+    printf 'Unsupported target: %s\n' "$TARGET_FILTER" >&2
+    exit 2
+    ;;
+esac
+
+if [ ! -f "$MANIFEST" ]; then
+  printf 'Missing manifest: %s\n' "$MANIFEST" >&2
+  exit 1
+fi
+
+run() {
+  if [ "$DRY_RUN" -eq 1 ]; then
+    printf '+ %s\n' "$*"
+  else
+    "$@"
+  fi
+}
+
+target_enabled() {
+  targets=$1
+  target=$2
+
+  case "$TARGET_FILTER" in
+    all) ;;
+    "$target") ;;
+    *) return 1 ;;
+  esac
+
+  case ",$targets," in
+    *,"$target",*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+ensure_managed_or_absent() {
+  src=$1
+  dst=$2
+
+  if [ -L "$dst" ]; then
+    link_target=$(readlink "$dst")
+    case "$link_target" in
+      "$src"|"$ROOT"/*)
+        run rm "$dst"
+        return
+        ;;
+      *)
+        printf 'Refusing to replace unmanaged symlink: %s -> %s\n' "$dst" "$link_target" >&2
+        exit 1
+        ;;
+    esac
+  fi
+
+  if [ -e "$dst" ]; then
+    marker="$dst/.ai-skills-managed"
+    if [ -f "$marker" ] && grep -Fxq "root=$ROOT" "$marker"; then
+      run rm -rf "$dst"
+      return
+    fi
+
+    printf 'Refusing to replace unmanaged path: %s\n' "$dst" >&2
+    exit 1
+  fi
+}
+
+install_one() {
+  rel=$1
+  target_root=$2
+  agent=$3
+
+  src="$ROOT/$rel"
+  name=${rel##*/}
+  dst="$target_root/$name"
+
+  case "$rel" in
+    skills/*) ;;
+    *)
+      printf 'Refusing unsupported source path: %s\n' "$rel" >&2
+      exit 1
+      ;;
+  esac
+
+  if [ ! -f "$src/SKILL.md" ]; then
+    printf 'Missing SKILL.md: %s\n' "$src/SKILL.md" >&2
+    exit 1
+  fi
+
+  if [ "$DRY_RUN" -eq 1 ]; then
+    printf '[%s] %s -> %s (%s)\n' "$agent" "$src" "$dst" "$MODE"
+    return
+  fi
+
+  mkdir -p "$target_root"
+  ensure_managed_or_absent "$src" "$dst"
+
+  if [ "$MODE" = copy ]; then
+    tmp="$target_root/.${name}.tmp.$$"
+    rm -rf "$tmp"
+    cp -R "$src" "$tmp"
+    {
+      printf 'root=%s\n' "$ROOT"
+      printf 'source=%s\n' "$src"
+      printf 'agent=%s\n' "$agent"
+    } > "$tmp/.ai-skills-managed"
+    mv "$tmp" "$dst"
+  else
+    ln -s "$src" "$dst"
+  fi
+
+  printf 'Installed [%s] %s -> %s\n' "$agent" "$rel" "$dst"
+}
+
+while IFS= read -r line || [ -n "$line" ]; do
+  set -- $line
+
+  case "${1:-}" in
+    ""|\#*) continue ;;
+  esac
+
+  rel=$1
+  targets=${2:-}
+
+  if [ -z "$targets" ]; then
+    printf 'Manifest line missing targets for %s\n' "$rel" >&2
+    exit 1
+  fi
+
+  if target_enabled "$targets" claude; then
+    install_one "$rel" "$HOME/.claude/skills" claude
+  fi
+
+  if target_enabled "$targets" codex; then
+    install_one "$rel" "$HOME/.codex/skills" codex
+  fi
+done < "$MANIFEST"

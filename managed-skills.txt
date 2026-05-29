@@ -1,0 +1,10 @@
+# Managed skill manifest.
+# Format:
+#   relative/path targets
+#
+# Targets are comma-separated and can include:
+#   claude,codex
+#
+# The installed skill name is the final path segment.
+
+skills/example-workflow claude,codex

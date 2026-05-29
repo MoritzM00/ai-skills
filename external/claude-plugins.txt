@@ -1,0 +1,9 @@
+# Claude Code plugin install manifest.
+# Format:
+#   marketplace-source plugin[@marketplace] scope
+#
+# scope can be: user, project, local
+#
+# This file is read by scripts/install-claude-plugins.
+
+Imbad0202/academic-research-skills academic-research-skills@academic-research-skills user

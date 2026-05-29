@@ -1,0 +1,48 @@
+#!/usr/bin/env sh
+set -eu
+
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+
+usage() {
+  printf 'Usage: scripts/package skills/<name>\n' >&2
+}
+
+if [ "$#" -ne 1 ]; then
+  usage
+  exit 2
+fi
+
+rel=${1%/}
+
+case "$rel" in
+  skills/*) ;;
+  *)
+    printf 'Skill path must live under skills/: %s\n' "$rel" >&2
+    exit 2
+    ;;
+esac
+
+src="$ROOT/$rel"
+name=${rel##*/}
+out_dir="$ROOT/dist"
+out="$out_dir/$name.zip"
+
+if [ ! -f "$src/SKILL.md" ]; then
+  printf 'Missing SKILL.md: %s\n' "$src/SKILL.md" >&2
+  exit 1
+fi
+
+if ! command -v zip >/dev/null 2>&1; then
+  printf 'zip is required to package skills for Claude.ai upload.\n' >&2
+  exit 1
+fi
+
+mkdir -p "$out_dir"
+rm -f "$out"
+
+(
+  cd "$src/.."
+  zip -qr "$out" "$name"
+)
+
+printf 'Wrote %s\n' "$out"
