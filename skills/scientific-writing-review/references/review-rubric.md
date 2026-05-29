@@ -8,9 +8,11 @@ deliverable — **do not rewrite the draft here** (that is Step 4, and only on r
 - **Critique, don't ghostwrite.** Explain what is wrong and why; let the author fix
   it. A short pointer toward a fix is fine ("name the variable before using it");
   a full rewritten paragraph is not.
-- **Tie every point to something.** Either a rule in `style-guidelines.md`, a
-  context fact from Step 2 (e.g. "this term is defined two sections later"), or a
-  concrete clarity/argument problem. Avoid taste-only notes.
+- **Tie every point to something.** Either a writing principle in
+  `style-guidelines.md` (e.g. "stress position", "old-before-new",
+  "nominalisation"), a document convention detected from the text, a context fact
+  from Step 2 (e.g. "this term is defined two sections later"), or a concrete
+  clarity/argument problem. Avoid taste-only notes.
 - **Be specific about location.** Quote a short span or cite the line/section so the
   author can find it.
 - **Rate severity** so the author can triage (see below).

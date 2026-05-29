@@ -11,7 +11,7 @@ Review prose for scientific and technical documents — papers, theses, technica
 
 The defining move of this skill: **gather context in proportion to the scope under review.** Reviewing a single paragraph needs almost no surrounding context; reviewing a whole chapter or thesis needs the document's structure, terminology, and narrative arc. Spending the right amount of effort on context — no more, no less — is what separates a tailored review from generic notes.
 
-This skill is **field- and venue-neutral**: it hardcodes no conventions. Citation style, length limits, tense/voice norms, anonymisation, and all other conventions vary per document (a math thesis differs from a conference paper) and are detected from the document/template or taken from the user-supplied `references/style-guidelines.md`. Never assume a convention — detect it or ask.
+This skill is **field- and venue-neutral**: it hardcodes no conventions. Citation style, length limits, tense/voice norms, anonymisation, and all other conventions vary per document (a math thesis differs from a conference paper) and are detected from the document/template. Never assume a convention — detect it or ask. The universal writing principles it judges prose against live in `references/style-guidelines.md`.
 
 This skill does *not* do literature search, citation discovery, or experiment design. If the request needs those, say so and stop. (The ARS `academic-paper` pipeline covers the full research-to-publication workflow.)
 
@@ -42,7 +42,7 @@ Applies to both reviewing and revising. Read `references/context-checklist.md` f
 
 ## Step 3 — Review (default deliverable)
 
-This is the skill's main job. Read `references/style-guidelines.md` (the conventions to judge against) and `references/review-rubric.md` (what to look for at each tier and how to structure the feedback). Then produce **structured feedback** — do not rewrite the draft.
+This is the skill's main job. Read `references/style-guidelines.md` (the universal writing principles to judge against) and `references/review-rubric.md` (what to look for at each tier and how to structure the feedback). Then produce **structured feedback** — do not rewrite the draft.
 
 Each finding should: locate the issue (quote a short span or give the line/section), say what is wrong and why (tie it to a guideline or to the argument/context), and rate its severity. You may point toward a fix in a phrase, but do **not** supply full rewritten paragraphs here — that is Step 4.
 
