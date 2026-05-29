@@ -56,9 +56,12 @@ logically organised**. Each is treated below with concrete fixes.
   "decide"; "perform an analysis" → "analyze"; "achieve a reduction" → "reduce".
 - **Drop empty intensifiers.** "very significant" → "significant" (the p-value
   carries the degree).
-- **But length is not the enemy** — a long sentence is fine if every element is
-  necessary information (e.g. a full instrument/reagent specification). The test:
-  *can any word be removed without losing meaning or precision?*
+- **Concision serves clarity, not the reverse** — the target is maximal signal,
+  not minimal length; cutting is selective, not maximalist. When removing a word
+  would cost meaning, nuance, or a logical connective the reader needs, keep it.
+  A long sentence is fine if every element is necessary information (e.g. a full
+  instrument/reagent specification). The test: *can any word be removed without
+  losing meaning or precision?*
 
 ### 3. Accuracy — correct representation of data, methods, claims
 

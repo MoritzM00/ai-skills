@@ -1,6 +1,6 @@
 ---
 name: scientific-writing-review
-description: Use when reviewing (or, on request, revising) prose for a scientific or technical document (paper, thesis, technical report) — a sentence, a paragraph, a section, or a whole chapter/thesis — against scientific-writing conventions and the surrounding document's style. Default behaviour is to REVIEW and give structured feedback, not to rewrite. Writing/editing only: assumes the research, results, and references already exist; does not run a research pipeline.
+description: Use when reviewing (or, on request, revising) prose for a scientific or technical document (paper, thesis, technical report) — a sentence, a paragraph, a section, or a whole chapter/thesis — against scientific-writing conventions and the surrounding document's style. Default behaviour is to REVIEW and give structured feedback, not to rewrite. Writing/editing only — assumes the research, results, and references already exist; does not run a research pipeline.
 ---
 
 # Scientific Writing — Review & Revise
