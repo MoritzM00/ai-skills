@@ -6,17 +6,27 @@ looks like a factual, citation, or claim issue.
 ## All tiers
 
 - [ ] Conforms to `style-guidelines.md`. Note any rule you could not verify.
-- [ ] If `style-guidelines.md` says the target requires **anonymisation** (e.g. double-blind submission), no de-anonymising content was introduced — no author names, identifying self-citations, or revealing links/acknowledgements.
+- [ ] Uses American English spelling by default (e.g. "organize", not "organise") unless the user, venue, or surrounding document clearly requires another variant.
+- [ ] Uses colons very selectively; any colon should introduce material that genuinely explains, specifies, or illustrates what precedes it.
+- [ ] Avoids braided sentences: no sentence should chain several rhetorical jobs (e.g. contrast, rationale, method, dataset, and tradeoff) unless the length is technically necessary.
+- [ ] If the detected user, venue, or document requirements call for **anonymization** (e.g. double-blind submission), no de-anonymizing content was introduced — no author names, identifying self-citations, or revealing links/acknowledgements.
 - [ ] No invented results, citations, or quantitative claims.
 - [ ] Notation and terminology match what the document already defines; nothing redefined or conflicting.
 - [ ] Output is in the right medium (LaTeX by default), reusing existing macros/commands.
 - [ ] No undefined symbols, undefined abbreviations, or dangling cross-references introduced.
 
+## Review output
+
+- [ ] Feedback stays in Review mode: no full rewritten sentences, paragraphs, or sections unless the user explicitly asked for revision.
+- [ ] Each finding has a concrete location, a severity tag, and a reason tied to a style principle, detected convention, context fact, or argument problem.
+- [ ] The review does not claim a factual, statistical, or citation error unless the supplied material supports that judgment; otherwise it flags the point as something to verify.
+- [ ] Context gathering stayed proportional to the tier; a micro review did not turn into a document-level audit.
+
 ## Section and above
 
-- [ ] The piece fulfils its role in the argument (Step 2 context) — not just locally correct prose.
+- [ ] The piece fulfills its role in the argument (Step 2 context) — not just locally correct prose.
 - [ ] Opening and closing connect to adjacent sections; transitions are present.
-- [ ] Length and density are in line with neighbouring sections.
+- [ ] Length and density are in line with neighboring sections.
 - [ ] Every non-trivial claim is either supported here or pointed to where it is supported.
 
 ## Chapter / document

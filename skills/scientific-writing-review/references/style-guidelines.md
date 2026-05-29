@@ -7,14 +7,14 @@ Sword, *Stylish Academic Writing* / *The Writer's Diet*; Williams, *Style*;
 Zinsser, *On Writing Well*). These hold across disciplines and always apply.
 
 Cite a principle by name in review findings when it helps the author ("stress
-position", "old-before-new", "nominalisation").
+position", "old-before-new", "nominalization").
 
 ---
 
 ## The pillars
 
 Good scientific prose is **clear, concise, accurate, objective, consistent, and
-logically organised**. Each is treated below with concrete fixes.
+logically organized**. Each is treated below with concrete fixes.
 
 ### 1. Clarity — immediately understandable, no ambiguity
 
@@ -25,6 +25,10 @@ logically organised**. Each is treated below with concrete fixes.
   (BDNF), a protein involved in neuronal survival…").
 - **Break up overloaded sentences.** One idea per sentence; split a 50-word
   sentence into three if each carries necessary detail.
+- **Avoid braided sentences.** Do not chain several rhetorical jobs into one
+  sentence, such as contrast + rationale + method + dataset + tradeoff. Treat
+  sentences longer than ~35 words with stacked clauses as suspect unless the
+  length is needed for a technical specification.
 - **Use specific verbs.** "examined factors contributing to depression", not
   "looked at depression".
 - **Fix ambiguous pronouns and referents.** If "they" / "this" could point to
@@ -52,7 +56,7 @@ logically organised**. Each is treated below with concrete fixes.
 
 - **Cut throat-clearing.** "It is interesting to note that our results
   demonstrate…" → "Our results show…".
-- **Turn noun phrases back into verbs** (de-nominalise): "make a decision" →
+- **Turn noun phrases back into verbs** (de-nominalize): "make a decision" →
   "decide"; "perform an analysis" → "analyze"; "achieve a reduction" → "reduce".
 - **Drop empty intensifiers.** "very significant" → "significant" (the p-value
   carries the degree).
@@ -74,7 +78,7 @@ logically organised**. Each is treated below with concrete fixes.
   "Vitamin D supplementation reduces cancer risk" (overreach) →
   "Vitamin D levels were inversely associated with cancer incidence (HR=0.82,
   95% CI 0.71–0.95)".
-- **Don't overgeneralise** beyond the sample; **quantify** vague descriptions
+- **Don't overgeneralize** beyond the sample; **quantify** vague descriptions
   ("15/50 (30%) withdrew", not "many dropped out").
 - **Use statistics language correctly** — "statistically significant", not
   "highly significant" for p=0.03; reserve emphatic language for the right range.
@@ -98,7 +102,7 @@ logically organised**. Each is treated below with concrete fixes.
 - Consistent notation, units, decimal places, and citation/number formatting
   throughout (the specific format is a convention — see below).
 
-### 6. Logical organisation — a visible "red thread"
+### 6. Logical organization — a visible "red thread"
 
 - **Paragraph shape:** topic sentence (the one idea) → supporting sentences →
   transition. Typically 3–7 sentences; split anything that sprawls past ~10.
@@ -153,12 +157,12 @@ words:
 |---|---|---|
 | Writing to *sound* scholarly | Abstraction, passive clutter, hidden argument | Concrete nouns, strong verbs, explicit claims, short subject–verb distance |
 | Jargon overload | Burdens the reader; obscures meaning | Define on first use; prefer the plain term where it exists |
-| **Nominalisation** | Verbs hidden in nouns make prose heavy and indirect | "give consideration to" → "consider"; "perform an investigation" → "investigate" |
+| **Nominalization** | Verbs hidden in nouns make prose heavy and indirect | "give consideration to" → "consider"; "perform an investigation" → "investigate" |
 | Excessive hedging | Sounds like you found nothing | One hedge, not three: "may be effective", not "could perhaps possibly under certain conditions" |
 | Insufficient hedging | Overstates beyond the evidence | "suggests"/"indicates" for correlational data, not "proves" |
 | **Anthropomorphism** | Attributes intent to objects | "The study aimed to…" / "We aimed to…", not "the study wanted to…"; "Table 1 shows", not "Table 1 tells us" |
 | Abbreviation abuse | Forces the reader to decode | Only abbreviate a term used ≥3–4 times; define at first use; never in the title |
-| Lit review as a list of summaries | Hides the gap; no interpretive map | Organise by theme/method/debate in service of the argument |
+| Lit review as a list of summaries | Hides the gap; no interpretive map | Organize by theme/method/debate in service of the argument |
 | Mixing results and discussion | Evidence and interpretation blur | Present findings first; interpret afterward |
 | Figures as decoration | Layout cost, no cognitive gain | Keep only visuals that aid comparison/compression/explanation |
 | Topic announced, not claimed | Reader can't tell what the work shows | "This thesis shows that X explains Y better than Z", not "discusses issues in Y" |
@@ -178,7 +182,10 @@ possibly (degree of certainty).
   showed improvement."
 - **Comma in a compound predicate:** no comma — "We measured BP and recorded
   symptoms" (one subject, two verbs).
-- **Pronoun agreement:** prefer pluralising — "Participants completed their
+- **Colon use:** use colons very selectively. Reserve them for places where the
+  second clause genuinely explains, specifies, or illustrates the first; don't
+  use them as a default way to add emphasis or signpost a sentence.
+- **Pronoun agreement:** prefer pluralizing — "Participants completed their
   questionnaires" over "Each participant completed their questionnaire".
 - **Subject–verb agreement with collective subjects:** "The group of participants
   *was* heterogeneous" (subject is "group").

@@ -1,7 +1,6 @@
 ---
 name: python-tooling
 description: Modern Python project tooling — uv for environments and dependencies, ruff for linting and formatting, ty for type checking, and pyproject.toml configuration.
-origin: ECC
 ---
 
 # Python Tooling

@@ -10,7 +10,7 @@ deliverable — **do not rewrite the draft here** (that is Step 4, and only on r
   a full rewritten paragraph is not.
 - **Tie every point to something.** Either a writing principle in
   `style-guidelines.md` (e.g. "stress position", "old-before-new",
-  "nominalisation"), a document convention detected from the text, a context fact
+  "nominalization"), a document convention detected from the text, a context fact
   from Step 2 (e.g. "this term is defined two sections later"), or a concrete
   clarity/argument problem. Avoid taste-only notes.
 - **Be specific about location.** Quote a short span or cite the line/section so the
@@ -31,13 +31,14 @@ deliverable — **do not rewrite the draft here** (that is Step 4, and only on r
 
 ### Micro — sentence / paragraph
 - Clarity and precision; ambiguous referents; overlong sentences.
+- Braided sentences that combine several rhetorical jobs in one chain.
 - Local flow and transitions between sentences.
 - Word choice, redundancy, filler.
 - Tense/voice/person consistency with the passage and the guidelines.
 - Undefined notation or terms used before they are introduced.
 
 ### Section
-- Does the section fulfil its **role in the argument** (Step 2)?
+- Does the section fulfill its **role in the argument** (Step 2)?
 - Internal structure: clear topic, logical order, signposting, a sentence that
   opens and one that closes.
 - Transitions to/from adjacent sections; consistent depth and length.
