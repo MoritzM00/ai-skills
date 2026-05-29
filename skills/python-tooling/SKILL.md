@@ -118,9 +118,11 @@ select = [
     "PTH",  # flake8-use-pathlib (prefer pathlib over os.path)
     "NPY",  # NumPy-specific rules (deprecated API usage)
     "PD",   # pandas-vet (idiomatic pandas; some rules are opinionated)
+    "A",    # flake8-builtins (don't shadow list, dict, id, ...)
 ]
 extend-ignore = [
     "E501",   # line length (let the formatter handle wrapping)
+    "A003",   # builtin as a class attribute is fine (e.g. model.id, .type)
     # "PD901",  # allow `df` as a DataFrame variable name
     # "PD011",  # .values false-positives on non-pandas objects
 ]
