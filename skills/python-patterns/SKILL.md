@@ -194,6 +194,44 @@ def get_user(user_id: str) -> User:
     return user
 ```
 
+## Logging
+
+Default to [`loguru`](https://github.com/Delgan/loguru) for application logging.
+It needs no handler/formatter boilerplate, has structured logging, automatic
+exception capture, and sensible defaults out of the box.
+
+```python
+from loguru import logger
+
+logger.info("Processing user {}", user_id)          # lazy, brace-style formatting
+logger.warning("Retry {n}/{total}", n=2, total=3)
+
+# Bind context for structured logs
+log = logger.bind(request_id=req_id)
+log.info("request received")
+
+# Capture exceptions with full traceback, no try/except plumbing
+@logger.catch
+def risky():
+    ...
+```
+
+Configure sinks once at startup (e.g. in `__main__`):
+
+```python
+import sys
+from loguru import logger
+
+logger.remove()  # drop the default stderr handler
+logger.add(sys.stderr, level="INFO")
+logger.add("app.log", rotation="10 MB", retention="10 days", serialize=True)
+```
+
+- Never call `logger.add()` at import time inside library modules — only the
+  application entry point should configure sinks.
+- For **libraries**, prefer the stdlib `logging` module so consumers control
+  output; reserve `loguru` for applications/services you own end-to-end.
+
 ## Context Managers
 
 ### Resource Management
