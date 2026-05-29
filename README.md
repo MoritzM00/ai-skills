@@ -28,6 +28,40 @@ skills/example-workflow claude,codex
 
 The installed skill name is the final path segment. For `skills/example-workflow`, the install name is `example-workflow`.
 
+## Adding Skills Later
+
+For a new managed skill:
+
+```sh
+mkdir -p skills/<name>
+# create skills/<name>/SKILL.md and any references/scripts/assets
+printf 'skills/<name> claude,codex\n' >> managed-skills.txt
+scripts/check
+scripts/install --dry-run
+scripts/install
+```
+
+Use `claude` or `codex` instead of `claude,codex` when the skill is agent-specific.
+
+To have an agent do this, run it from this repository and give it a prompt like:
+
+```text
+Add a managed skill named <name> for <claude|codex|claude,codex>.
+Put it under skills/<name>, create or update SKILL.md, add it to managed-skills.txt,
+run scripts/check and scripts/install --dry-run, and summarize what changed.
+Do not edit ~/.claude/skills or ~/.codex/skills directly.
+Only run scripts/install if I explicitly ask.
+```
+
+For an adopted marketplace skill, use:
+
+```text
+Adopt the skill <source skill/path> into this repo as skills/<name>.
+Preserve useful upstream source/license notes, remove assumptions that do not apply,
+add the correct target in managed-skills.txt, then run scripts/check and scripts/install --dry-run.
+Use claude,codex only if the skill is actually portable and tested in both agents.
+```
+
 ## Commands
 
 Check managed skills:
