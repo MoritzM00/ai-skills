@@ -5,24 +5,20 @@ description: Use when reviewing (or, on request, revising) prose for a scientifi
 
 # Scientific Writing — Review & Revise
 
-Review prose for scientific and technical documents — papers, theses, technical reports — across fields, and revise it only as an explicit second step. This skill is about *writing well*, not doing research: assume the ideas, results, and references already exist.
+Review prose for scientific and technical documents — papers, theses, technical reports — across fields. This skill is about *writing well*, not doing research: assume the ideas, results, and references already exist. It does **not** do literature search, citation discovery, or experiment design; if the request needs those, say so and stop. (The ARS `academic-paper` pipeline covers the full research-to-publication workflow.)
 
-**This is primarily a reviewer.** The default deliverable is **structured feedback** on the text — what works, what doesn't, and why — at the level of a paragraph, a chapter, or a whole thesis. It does **not** rewrite the draft by default. Rewriting happens only in a separate, explicitly requested second step, and only on the parts the author chooses. This two-step separation is deliberate: the author keeps control of their own voice and decides which feedback to act on.
+The defining move of this skill: **gather context in proportion to the scope under review.** A single paragraph needs almost no surrounding context; a whole chapter or thesis needs the document's structure, terminology, and narrative arc. Spending the right amount of effort on context is what separates a tailored review from generic notes.
 
-The defining move of this skill: **gather context in proportion to the scope under review.** Reviewing a single paragraph needs almost no surrounding context; reviewing a whole chapter or thesis needs the document's structure, terminology, and narrative arc. Spending the right amount of effort on context — no more, no less — is what separates a tailored review from generic notes.
-
-This skill is **field- and venue-neutral**: it hardcodes no conventions. Citation style, length limits, tense/voice norms, anonymization, and all other conventions vary per document (a math thesis differs from a conference paper) and are detected from the document/template. Never assume a convention — detect it or ask. Use **American English** spelling by default (e.g. "organize", not "organise") unless the user, venue, or surrounding document clearly requires another variant. The universal writing principles it judges prose against live in `references/style-guidelines.md`.
-
-This skill does *not* do literature search, citation discovery, or experiment design. If the request needs those, say so and stop. (The ARS `academic-paper` pipeline covers the full research-to-publication workflow.)
+This skill is **field- and venue-neutral**: it hardcodes no conventions. Citation style, length limits, tense/voice norms, anonymization, and the rest vary per document (a math thesis differs from a conference paper). Never assume a convention — detect it from the document/template or ask. Use **American English** spelling by default (e.g. "organize", not "organise") unless the user, venue, or surrounding document clearly requires another variant. The universal writing principles it judges prose against live in `references/style-guidelines.md`.
 
 ## The two modes
 
-- **Review (default).** Set scope, depth, and focus → gather context → assess against only the relevant style guidelines and the review rubric → run the review self-check → deliver structured feedback. **Do not rewrite the draft.** End by offering to apply specific points.
-- **Revise (only when asked).** After the author picks which feedback to act on — or explicitly asks for a rewrite up front — produce the revised text for *those* parts. Skip this entirely unless the author requests it.
+- **Review (default).** Set scope, depth, and focus → gather context → assess against the relevant style guidelines and the review rubric → run the review self-check → deliver **structured feedback**. **Do not rewrite the draft;** end by offering to apply specific points.
+- **Revise (only when asked).** After the author picks which feedback to act on — or asks for a rewrite up front — produce the revised text for *those* parts.
 
-Default to Review mode. Switch to Revise mode only on an explicit request such as "rewrite this", "apply points 2 and 4", or "now revise it".
+Default to Review. Switch to Revise only on an explicit request such as "rewrite this", "apply points 2 and 4", or "now revise it". Keeping the two separate is deliberate: the author keeps control of their voice and decides which feedback to act on.
 
-The numbered steps below are the procedure: Steps 1–3 carry out a review; Step 4 is the revise mode and runs only when requested.
+The numbered steps below are the procedure. Steps 1–3 carry out a review; Step 4 runs only when a revision is requested.
 
 ## Step 1 — Set scope, depth, and focus
 
