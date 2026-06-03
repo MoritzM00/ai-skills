@@ -1,6 +1,6 @@
 # Style Guidelines
 
-Universal writing principles the skill judges prose against — field- and
+Universal writing principles the skill judges prose against, field- and
 venue-neutral craft, drawn from the standard writing literature (Strunk & White,
 *The Elements of Style*; Gopen & Swan, "The Science of Scientific Writing";
 Sword, *Stylish Academic Writing* / *The Writer's Diet*; Williams, *Style*;
@@ -16,7 +16,7 @@ position", "old-before-new", "nominalization").
 Good scientific prose is **clear, concise, accurate, objective, consistent, and
 logically organized**. Each is treated below with concrete fixes.
 
-### 1. Clarity — immediately understandable, no ambiguity
+### 1. Clarity: immediately understandable, no ambiguity
 
 - **Use precise, unambiguous language.** Prefer numbers to vague quantifiers.
   - "The drug seemed to help quite a few patients." →
@@ -31,16 +31,21 @@ logically organized**. Each is treated below with concrete fixes.
   length is needed for a technical specification.
 - **Use specific verbs.** "examined factors contributing to depression", not
   "looked at depression".
+- **Choose voice for clarity.** Use active voice when naming the actor makes the
+  sentence clearer or shorter ("Researchers analyzed the samples"). Passive
+  voice is acceptable, and often natural in Methods, when the procedure, sample,
+  or result matters more than the actor ("Blood samples were collected at
+  baseline"). Do not treat either voice as a mechanical rule.
 - **Fix ambiguous pronouns and referents.** If "they" / "this" could point to
   more than one thing, name the thing.
   - "…decreased proliferation, which was unexpected." →
     "…decreased proliferation. This inverse relationship was unexpected."
-- **Fix misplaced and dangling modifiers** — the modifier must attach to the
+- **Fix misplaced and dangling modifiers:** the modifier must attach to the
   right actor.
   - "After incubating for 2 hours, we measured absorbance." (we were incubated?)
     → "After incubating the samples for 2 hours, we measured absorbance."
 
-### 2. Conciseness — fewest words that keep meaning
+### 2. Conciseness: fewest words that keep meaning
 
 - **Cut redundant phrases.**
 
@@ -60,32 +65,32 @@ logically organized**. Each is treated below with concrete fixes.
   "decide"; "perform an analysis" → "analyze"; "achieve a reduction" → "reduce".
 - **Drop empty intensifiers.** "very significant" → "significant" (the p-value
   carries the degree).
-- **Concision serves clarity, not the reverse** — the target is maximal signal,
+- **Concision serves clarity, not the reverse:** the target is maximal signal,
   not minimal length; cutting is selective, not maximalist. When removing a word
   would cost meaning, nuance, or a logical connective the reader needs, keep it.
   A long sentence is fine if every element is necessary information (e.g. a full
   instrument/reagent specification). The test: *can any word be removed without
   losing meaning or precision?*
 
-### 3. Accuracy — correct representation of data, methods, claims
+### 3. Accuracy: correct representation of data, methods, claims
 
 - **Report exact values at appropriate precision** ("24.7 ± 3.2 (SD)", not
   "about 25"); don't imply false precision ("45.2 years", not "45.237 years").
 - **Separate observation from interpretation.** "BP decreased from 145 to 132
   mmHg (p=0.003)" is a result; "the intervention effectively lowers BP" is an
-  interpretation — don't fuse them.
+  interpretation. Do not fuse them.
 - **Match claim strength to design.** No causal claims from observational data:
   "Vitamin D supplementation reduces cancer risk" (overreach) →
   "Vitamin D levels were inversely associated with cancer incidence (HR=0.82,
-  95% CI 0.71–0.95)".
+  95% CI 0.71 to 0.95)".
 - **Don't overgeneralize** beyond the sample; **quantify** vague descriptions
   ("15/50 (30%) withdrew", not "many dropped out").
-- **Use statistics language correctly** — "statistically significant", not
+- **Use statistics language correctly:** "statistically significant", not
   "highly significant" for p=0.03; reserve emphatic language for the right range.
 - **Verify all numbers.** Text matches tables/figures; n values sum; percentages
   recompute; statistics are right.
 
-### 4. Objectivity — impartial, no unsupported evaluation
+### 4. Objectivity: impartial, no unsupported evaluation
 
 - Present results without bias: "Method A showed higher accuracy than Method B
   (87% vs 76%, p=0.02)", not "our superior method performed better".
@@ -97,20 +102,39 @@ logically organized**. Each is treated below with concrete fixes.
 
 ### 5. Consistency
 
-- **One term per concept** — don't vary "cognitive function" / "mental
+- **One term per concept:** don't vary "cognitive function" / "mental
   performance" / "intellectual ability" for the same thing.
 - Consistent notation, units, decimal places, and citation/number formatting
-  throughout (the specific format is a convention — see below).
+  throughout (the specific format is a convention; see below).
+- **Use tense consistently.** Use present tense for established facts,
+  conclusions the paper draws, and references to figures or tables ("Figure 1
+  shows the distribution"). Use past tense for completed methods and specific
+  findings ("Participants completed questionnaires"; "We observed a decrease").
+  Use present perfect for prior work with current relevance ("Several approaches
+  have been proposed"). Match section conventions: Methods and Results usually
+  use past tense; Discussion interpretations usually use present tense.
+- **Manage abbreviations deliberately.** Define nonstandard abbreviations at
+  first use in the abstract if used there and at first use in the main text. Do
+  not abbreviate terms used only once or twice, do not abbreviate in the title,
+  and limit new abbreviations when possible. Standard abbreviations such as DNA,
+  RNA, and HIV usually do not need definition when field convention supports
+  them.
 
-### 6. Logical organization — a visible "red thread"
+### 6. Logical organization: a visible "red thread"
 
 - **Paragraph shape:** topic sentence (the one idea) → supporting sentences →
-  transition. Typically 3–7 sentences; split anything that sprawls past ~10.
+  transition. Typically 3 to 7 sentences; split anything that sprawls past ~10.
 - **One main idea per paragraph.** A 1-sentence paragraph usually needs
   developing or merging.
 - **Signpost** ("First… Next… Finally…") and keep **parallel structure** in
   lists and aims: "to (1) measure BP, (2) assess cognition, and (3) evaluate
-  mood" — all bare infinitives, not a mix.
+  mood": all bare infinitives, not a mix.
+- **Use transition phrases by relationship.** Use sequence cues for order
+  ("first", "next", "finally"), additive cues for accumulation ("furthermore",
+  "in addition"), contrast cues for opposition ("however", "conversely"), result
+  cues for consequence ("therefore", "consequently"), and example cues for
+  illustration ("for example", "specifically"). Keep transitions purposeful;
+  over-signposting feels mechanical.
 - **Section flow:** questions raised in the Introduction get answered in Results;
   findings in Results get interpreted in Discussion.
 
@@ -118,14 +142,14 @@ logically organized**. Each is treated below with concrete fixes.
 
 ## Reader-expectation principles (Gopen & Swan)
 
-These explain *why* the rules above work — readers process structure, not just
+These explain *why* the rules above work: readers process structure, not just
 words:
 
 - **Keep subject and verb close.** A reader holds a sentence open until the verb
   arrives; material wedged between them taxes memory.
 - **Old before new.** Open a sentence with information the reader already has;
   put new information later. This is what makes consecutive sentences cohere.
-- **Stress position.** The end of a sentence is where readers place emphasis —
+- **Stress position.** The end of a sentence is where readers place emphasis;
   put the idea you want stressed there; don't trail off on a low-value qualifier.
 - **Topic position.** The beginning establishes whose story the sentence tells;
   keep it consistent across a passage so the through-line is obvious.
@@ -139,13 +163,13 @@ words:
 - **Literature review is an argument, not a list of summaries.** Group sources
   analytically (theme, method, debate); make clear what is known, disputed, and
   missing, and why this work is warranted.
-- **Keep results and discussion separate** — present findings first, interpret
+- **Keep results and discussion separate:** present findings first, interpret
   afterward; don't smuggle conclusions into results.
-- **Methods must be scrutable/replicable** — data, procedure, analysis,
+- **Methods must be scrutable/replicable:** data, procedure, analysis,
   inclusion criteria, limitations.
-- **Discussion stays proportional** — tie interpretation to the question and the
+- **Discussion stays proportional:** tie interpretation to the question and the
   literature, state limitations explicitly, keep implications within the evidence.
-- **Figures and tables earn their place** — include a visual only if it improves
+- **Figures and tables earn their place:** include a visual only if it improves
   comparison, compression, or explanation over prose; cite every one in the text;
   captions should stand alone without repeating the paragraph.
 
@@ -155,13 +179,13 @@ words:
 
 | Pitfall | Why it hurts | Fix |
 |---|---|---|
-| Writing to *sound* scholarly | Abstraction, passive clutter, hidden argument | Concrete nouns, strong verbs, explicit claims, short subject–verb distance |
+| Writing to *sound* scholarly | Abstraction, passive clutter, hidden argument | Concrete nouns, strong verbs, explicit claims, short subject-verb distance |
 | Jargon overload | Burdens the reader; obscures meaning | Define on first use; prefer the plain term where it exists |
 | **Nominalization** | Verbs hidden in nouns make prose heavy and indirect | "give consideration to" → "consider"; "perform an investigation" → "investigate" |
 | Excessive hedging | Sounds like you found nothing | One hedge, not three: "may be effective", not "could perhaps possibly under certain conditions" |
 | Insufficient hedging | Overstates beyond the evidence | "suggests"/"indicates" for correlational data, not "proves" |
 | **Anthropomorphism** | Attributes intent to objects | "The study aimed to…" / "We aimed to…", not "the study wanted to…"; "Table 1 shows", not "Table 1 tells us" |
-| Abbreviation abuse | Forces the reader to decode | Only abbreviate a term used ≥3–4 times; define at first use; never in the title |
+| Abbreviation abuse | Forces the reader to decode | Only abbreviate a term used at least 3 or 4 times; define at first use in each required location; never in the title |
 | Lit review as a list of summaries | Hides the gap; no interpretive map | Organize by theme/method/debate in service of the argument |
 | Mixing results and discussion | Evidence and interpretation blur | Present findings first; interpret afterward |
 | Figures as decoration | Layout cost, no cognitive gain | Keep only visuals that aid comparison/compression/explanation |
@@ -178,24 +202,25 @@ possibly (degree of certainty).
 
 - **Dangling modifier:** the opening modifier must attach to the sentence's
   subject ("After 2-hour incubation, we measured…").
-- **Comma between subject and verb:** wrong — "The participants in the group[,]
+- **Comma between subject and verb:** wrong, "The participants in the group[,]
   showed improvement."
-- **Comma in a compound predicate:** no comma — "We measured BP and recorded
+- **Comma in a compound predicate:** no comma, "We measured BP and recorded
   symptoms" (one subject, two verbs).
 - **Avoid colons in prose.** Do not use colons as a default sentence pattern or
   as a way to add emphasis, announce examples, or signpost a sentence. In
   revisions, remove colons unless a colon is required by syntax or convention
   (e.g. LaTeX labels/citation keys, ratios, times, title/subtitle formats, code,
   or template fields) or the surrounding document clearly and consistently uses
-  them that way. Prefer sentence splits or explicit connectives. This governs
-  prose you generate; when reviewing, flag the author's colons only if they are
-  genuinely excessive.
+  them that way. Prefer sentence splits, commas, or explicit connectives. Do
+  not replace colons with em dashes or en dashes. This governs prose you
+  generate; when reviewing, flag the author's colons only if they are genuinely
+  excessive.
 
   | Avoid | Prefer |
   |---|---|
   | "The issue is structural: the paragraph combines motivation, method, and contribution in one sentence." | "This is a structural issue because the paragraph combines motivation, method, and contribution in one sentence." |
   | "The benchmark has one advantage: it combines genuine accidents with staged and synthetic falls." | "The benchmark's advantage is that it combines genuine accidents with staged and synthetic falls." |
-  | "We evaluate three aspects: implementation effort, inference cost, and labeled data needs." | "We evaluate three aspects — implementation effort, inference cost, and labeled data needs." |
+  | "We evaluate three aspects: implementation effort, inference cost, and labeled data needs." | "We evaluate implementation effort, inference cost, and labeled data needs." |
 
   When removing a colon, choose the replacement that preserves the relationship.
   Use "because" when the second part gives a reason, "which" or "that" when it
@@ -203,12 +228,12 @@ possibly (degree of certainty).
   colon introduces a list, fold the list into the sentence. Split into two
   sentences only when both parts can stand naturally on their own and the result
   does not feel clipped.
-- **Pronoun agreement:** prefer pluralizing — "Participants completed their
+- **Pronoun agreement:** prefer pluralizing, "Participants completed their
   questionnaires" over "Each participant completed their questionnaire".
-- **Subject–verb agreement with collective subjects:** "The group of participants
+- **Subject-verb agreement with collective subjects:** "The group of participants
   *was* heterogeneous" (subject is "group").
 
-### Word choice — commonly confused
+### Word choice: commonly confused
 
 | Word pair | Distinction |
 |---|---|
@@ -237,6 +262,6 @@ and vague quantifiers ("some/often/recently" → specify the number/frequency/ti
 | "This thesis will discuss several issues related to urban heat." | "This thesis shows that neighborhood tree cover explains more variation in nighttime urban heat than building height." | Announces the contribution, not merely the topic. |
 
 **Tools** (Grammarly, Hemingway, LanguageTool, readability scores) are a
-starting point, not an arbiter — they don't understand scientific conventions
+starting point, not an arbiter; they don't understand scientific conventions
 and will push you to sacrifice precision for readability. Human/peer review
 remains the most valuable check.

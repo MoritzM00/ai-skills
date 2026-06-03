@@ -1,13 +1,15 @@
 # Review Rubric
 
 How to review scientific prose and structure the feedback. The review is the
-deliverable — **do not rewrite the draft here** (that is Step 4, and only on request).
+deliverable. **Do not rewrite the draft here** (that is Step 4, and only on request).
 
 ## Principles
 
-- **Critique, don't ghostwrite.** Explain what is wrong and why; let the author fix
-  it. A short pointer toward a fix is fine ("name the variable before using it");
-  a full rewritten paragraph is not.
+- **Critique, don't ghostwrite.** Explain what is wrong and why; let the author
+  decide which issues to fix. Do not include replacements, directives, or
+  rewritten alternatives in Review mode.
+- **Use the review vocabulary.** Read `review-vocabulary.md` before producing
+  findings. Each finding gets one approved problem label.
 - **Tie every point to something.** Either a writing principle in
   `style-guidelines.md` (e.g. "stress position", "old-before-new",
   "nominalization"), a document convention detected from the text, a context fact
@@ -21,18 +23,18 @@ deliverable — **do not rewrite the draft here** (that is Step 4, and only on r
 
 ## Severity tags
 
-- **[blocking]** — wrong, unclear, or unsupported in a way a reader/examiner would
+- **[blocking]:** wrong, unclear, or unsupported in a way a reader/examiner would
   stumble on; must be addressed.
-- **[suggestion]** — a real improvement to clarity, structure, or style, but not
+- **[suggestion]:** a real improvement to clarity, structure, or style, but not
   strictly wrong.
-- **[nit]** — minor polish, optional.
+- **[nit]:** minor polish, optional.
 
 ## What to look for, by tier
 
-### Micro — sentence / paragraph
+### Micro: sentence / paragraph
 - Clarity and precision; ambiguous referents; overlong sentences.
 - Braided sentences that combine several rhetorical jobs in one chain.
-- Colon overuse — flag only genuinely excessive reliance on colons for emphasis,
+- Colon overuse: flag only genuinely excessive reliance on colons for emphasis,
   examples, or signposting, not every well-formed colon.
 - Local flow and transitions between sentences.
 - Word choice, redundancy, filler.
@@ -58,9 +60,14 @@ deliverable — **do not rewrite the draft here** (that is Step 4, and only on r
 
 ## Output structure
 
-1. **Overall assessment** — 2–4 sentences: what works, the biggest issues, fitness
+1. **Overall assessment:** 2 to 4 sentences: what works, the biggest issues, fitness
    for purpose at this tier.
-2. **Findings** — grouped by location (top-to-bottom) or by theme, each with a
-   severity tag, the quoted/located span, and the reason.
-3. **Top priorities** — the few [blocking] items to fix first.
-4. **Offer** — "Tell me which points to apply and I'll revise those parts."
+2. **Findings:** grouped by location (top-to-bottom) or by theme. Use this shape:
+
+   ```text
+   [LABEL] [severity] "short quoted span"
+   Problem: one sentence explaining what is wrong and why.
+   ```
+
+3. **Top priorities:** the few [blocking] items to fix first.
+4. **Offer:** "Tell me which points to apply and I'll revise those parts."

@@ -2,20 +2,20 @@
 
 Applies to both reviewing and revising. Gather context in proportion to scope. Read available files first; ask the user only for what cannot be found. Stop gathering once the items for the tier are covered.
 
-## Micro — sentence or single paragraph
+## Micro: sentence or single paragraph
 
 Minimal context. Focus is prose quality.
 
 - [ ] The immediately preceding and following sentence/paragraph (so flow and tense/voice can be judged in context).
-- [ ] Any technical term or symbol used in the snippet — is it already defined nearby? (Flag undefined notation; don't assume.)
+- [ ] Any technical term or symbol used in the snippet: is it already defined nearby? (Flag undefined notation; don't assume.)
 - [ ] The local register/style (formal, hedged, present vs. past tense in this passage).
 
 Do **not** load the whole document to review a micro snippet.
 
-## Section — one (sub)section
+## Section: one (sub)section
 
 - [ ] The section's **role in the argument**: what must the reader believe/understand after reading it?
-- [ ] **Adjacent sections**: their style, typical length, and how they open/close — so this section fits.
+- [ ] **Adjacent sections**: their style, typical length, and how they open/close, so this section fits.
 - [ ] **Terminology & notation already introduced** earlier in the document (maintain consistency; reuse, don't redefine).
 - [ ] **Citation conventions** in use (`\citet` vs `\citep`, numeric vs author-year, bib keys available).
 - [ ] **Reader state at this point**: what has already been established, what is assumed known, what is still to come.
@@ -32,4 +32,4 @@ Do **not** load the whole document to review a micro snippet.
 
 ## When context is missing
 
-If a needed item cannot be found in the files and is not supplied, ask a targeted question rather than guessing — especially for notation, defined terms, and claims. Never invent citations or results to fill a gap.
+If a needed item cannot be found in the files and is not supplied, ask a targeted question rather than guessing, especially for notation, defined terms, and claims. Never invent citations or results to fill a gap.
