@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tune Hyperparams with Optuna"
+  short_description: "Tune XGBoost and LightGBM with Optuna"
+  default_prompt: "Use $tune-hyperparams-optuna to tune an XGBoost or LightGBM sklearn model with Optuna."
