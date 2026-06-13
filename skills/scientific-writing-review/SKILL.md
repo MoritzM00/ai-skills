@@ -5,7 +5,7 @@ description: Review or revise scientific and technical prose, including papers, 
 
 # Scientific Writing Review and Revise
 
-Review prose for scientific and technical documents, including papers, theses, and technical reports, across fields. This skill is about *writing well*, not doing research: assume the ideas, results, and references already exist. It does **not** do literature search, citation discovery, or experiment design; if the request needs those, say so and stop. (The ARS `academic-paper` pipeline covers the full research-to-publication workflow.)
+Review prose for scientific and technical documents, including papers, theses, and technical reports, across fields. This skill is about *writing well*, not doing research: assume the ideas, results, and references already exist. It does **not** do literature search, citation discovery, or experiment design; if the request needs those, say so and stop. A dedicated research pipeline, if available, covers the full research-to-publication workflow.
 
 The defining move of this skill: **gather context in proportion to the scope under review.** A single paragraph needs almost no surrounding context; a whole chapter or thesis needs the document's structure, terminology, and narrative arc. Spending the right amount of effort on context is what separates a tailored review from generic notes.
 
@@ -64,6 +64,6 @@ Skip this step unless the author asks for a rewrite (e.g. "apply points 2 and 4"
 
 Produce **LaTeX** by default unless the surrounding file is clearly Markdown or plain prose. Match the existing document: reuse its macros, citation commands (`\cite`, `\citet`, `\citep`, …), math notation, environments, and sectioning. Do not introduce notation or terminology that conflicts with what is already defined (see Step 2).
 
-As a house preference for text you generate, avoid introducing colons in revised prose; prefer a sentence split, comma, or explicit connective. Do not use em dashes or en dashes as substitutes. Use a colon only when syntax or convention requires one (a LaTeX label/citation key, ratio, time, title/subtitle, code, or template field), or when the surrounding document clearly and consistently uses colons in that position. This governs your own output; it is not a defect to flag in the author's draft (the rubric flags only genuinely excessive colon use).
+For punctuation house style in revised prose, follow the colon rule in `references/style-guidelines.md`; do not treat ordinary author colons as defects unless they are genuinely excessive.
 
 Preserve the author's meaning, claims, and voice. Improve clarity, structure, and conformance to style, but never invent results, citations, or quantitative claims. Then run `references/self-check.md` for the relevant tier before presenting the revision, and flag (rather than silently fix) anything that looks like a factual or citation issue.

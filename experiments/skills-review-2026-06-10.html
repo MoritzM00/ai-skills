@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill Audit — ai-skills · 2026-06-10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4f1ea;
+    --ink: #1d1c19;
+    --ink-soft: #55524a;
+    --rule: #d8d2c4;
+    --accent: #b3450e;       /* burnt sienna */
+    --accent-soft: #f0e2d6;
+    --ok: #2e6e4e;
+    --ok-soft: #dfeae2;
+    --med: #a05b00;
+    --med-soft: #f3e7d2;
+    --low: #4f5d75;
+    --low-soft: #e2e6ec;
+    --info: #6b6557;
+    --info-soft: #ebe7dc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Spline Sans Mono", monospace;
+    font-size: 15px;
+    line-height: 1.65;
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 31px, rgba(29,28,25,.035) 31px 32px);
+  }
+  .sheet { max-width: 880px; margin: 0 auto; padding: 0 32px 96px; }
+
+  /* ---------- masthead ---------- */
+  header { padding: 56px 0 0; }
+  .kicker {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 6px 2px;
+    font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+  }
+  h1 {
+    font-family: "Fraunces", serif;
+    font-weight: 900; font-size: clamp(44px, 8vw, 76px);
+    line-height: .98; letter-spacing: -.01em;
+    margin: 28px 0 10px;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .standfirst {
+    font-size: 15px; color: var(--ink-soft);
+    max-width: 60ch; margin-bottom: 36px;
+  }
+
+  /* ---------- verdict strip ---------- */
+  .verdict {
+    border: 2px solid var(--ink);
+    background: #fbf9f4;
+    box-shadow: 6px 6px 0 var(--accent);
+    padding: 22px 26px; margin-bottom: 48px;
+  }
+  .verdict strong { color: var(--accent); }
+  .verdict .v-label {
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-soft); display: block; margin-bottom: 8px;
+  }
+
+  /* ---------- stats ---------- */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--ink); border: 1px solid var(--ink); margin-bottom: 56px; }
+  .stat { background: var(--paper); padding: 16px 18px; }
+  .stat b { font-family: "Fraunces", serif; font-size: 34px; font-weight: 900; display: block; line-height: 1; }
+  .stat span { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+  @media (max-width: 640px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ---------- sections ---------- */
+  section { margin-bottom: 60px; }
+  h2 {
+    font-family: "Fraunces", serif; font-weight: 900;
+    font-size: 30px; line-height: 1.1;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 8px; margin-bottom: 22px;
+    display: flex; align-items: baseline; gap: 14px;
+  }
+  h2 .no {
+    font-size: 14px; font-family: "Spline Sans Mono", monospace;
+    font-weight: 600; color: var(--accent);
+  }
+  h3 { font-family: "Fraunces", serif; font-weight: 600; font-size: 20px; margin: 26px 0 8px; }
+  p { margin-bottom: 14px; max-width: 72ch; }
+  p.meta { font-size: 13px; color: var(--ink-soft); margin: -2px 0 16px; }
+  code {
+    background: #ebe6da; padding: 1px 6px; border-radius: 3px;
+    font-family: inherit; font-size: .92em;
+  }
+
+  /* ---------- findings ---------- */
+  .finding {
+    border-left: 4px solid var(--rule);
+    padding: 12px 18px; margin: 14px 0;
+    background: #faf8f2;
+  }
+  .finding.medium { border-left-color: var(--med); }
+  .finding.low    { border-left-color: var(--low); }
+  .finding.note   { border-left-color: var(--info); }
+  .finding p:last-child { margin-bottom: 0; }
+  .tag {
+    display: inline-block; font-size: 10.5px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase;
+    padding: 2px 9px; border-radius: 999px; margin-right: 8px;
+    vertical-align: 2px;
+  }
+  .tag.medium { background: var(--med-soft); color: var(--med); }
+  .tag.low    { background: var(--low-soft); color: var(--low); }
+  .tag.note   { background: var(--info-soft); color: var(--info); }
+  .tag.pass   { background: var(--ok-soft); color: var(--ok); }
+  .finding b.title { font-weight: 600; }
+
+  /* ---------- tables ---------- */
+  table { width: 100%; border-collapse: collapse; margin: 18px 0 8px; font-size: 13.5px; }
+  th {
+    text-align: left; font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-soft); border-bottom: 2px solid var(--ink); padding: 6px 10px 6px 0;
+  }
+  td { border-bottom: 1px solid var(--rule); padding: 9px 10px 9px 0; vertical-align: top; }
+
+  /* ---------- checklist ---------- */
+  ul.actions { list-style: none; margin: 12px 0; }
+  ul.actions li {
+    padding: 9px 0 9px 34px; position: relative;
+    border-bottom: 1px dashed var(--rule); max-width: 76ch;
+  }
+  ul.actions li::before {
+    content: "→"; position: absolute; left: 4px; color: var(--accent); font-weight: 600;
+  }
+
+  footer {
+    border-top: 3px solid var(--ink); margin-top: 24px; padding-top: 12px;
+    font-size: 12px; color: var(--ink-soft);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header>
+  <div class="kicker">
+    <span>ai-skills · skill audit</span>
+    <span>No. 01 — 10 June 2026</span>
+  </div>
+  <h1>Four skills,<br>one <em>repository review</em>.</h1>
+  <p class="standfirst">
+    A pass over every managed skill in <code>skills/</code> — structure, factual accuracy,
+    internal consistency, and cross-skill agreement — plus the manifest, scripts, and
+    plugin wiring that deploy them.
+  </p>
+</header>
+
+<div class="verdict">
+  <span class="v-label">Verdict</span>
+  <strong>Keep all four skills.</strong> The repository is healthy: <code>scripts/check</code> passes with
+  zero warnings, the dry-run install maps cleanly to Claude and Codex targets, and the
+  skills themselves are well above average — current tooling, behavior-focused testing advice,
+  and a genuinely well-engineered writing-review skill. The findings below are refinements,
+  not rescues: two medium items in <code>python-patterns</code>, a size ceiling approaching in
+  <code>python-testing</code>, and a few consistency threads worth tying off.
+</div>
+
+<div class="stats">
+  <div class="stat"><b>4/4</b><span>skills pass checks</span></div>
+  <div class="stat"><b>0</b><span>blocking issues</span></div>
+  <div class="stat"><b>5</b><span>medium findings</span></div>
+  <div class="stat"><b>7</b><span>low / notes</span></div>
+</div>
+
+<!-- ============================================================ -->
+<section id="health">
+  <h2><span class="no">§1</span> Repository health</h2>
+  <table>
+    <tr><th>Check</th><th>Result</th></tr>
+    <tr><td><code>scripts/check</code> (frontmatter, manifest targets, 500-line ceiling)</td>
+        <td><span class="tag pass">pass</span> 0 errors, 0 warnings</td></tr>
+    <tr><td><code>scripts/install --dry-run</code></td>
+        <td><span class="tag pass">pass</span> all 4 skills symlink to both <code>~/.claude/skills</code> and <code>~/.codex/skills</code></td></tr>
+    <tr><td><code>managed-skills.txt</code> ↔ <code>skills/</code> agreement</td>
+        <td><span class="tag pass">pass</span> 4 entries, 4 directories, no orphans</td></tr>
+    <tr><td>External plugins (<code>external/claude-plugins.txt</code>)</td>
+        <td><span class="tag pass">pass</span> one entry: <code>academic-research-skills</code> (user scope)</td></tr>
+    <tr><td><code>experiments/</code> kept out of manifest</td>
+        <td><span class="tag pass">pass</span></td></tr>
+  </table>
+  <p class="meta">Sizes: scientific-writing-review 69 lines + 482 in references/ · python-testing 492 · python-patterns 410 · python-tooling 303.</p>
+</section>
+
+<!-- ============================================================ -->
+<section id="swr">
+  <h2><span class="no">§2</span> scientific-writing-review</h2>
+  <p class="meta">69-line SKILL.md + 5 reference files · the strongest skill in the repo</p>
+  <p>
+    This is the model the others should aspire to. It uses progressive disclosure correctly
+    (a short SKILL.md routing to references read proportionally to scope), separates Review
+    from Revise so the author keeps control of their voice, scales context-gathering to a
+    three-tier scope model, and its description states both what it does <em>and</em> what it
+    refuses to do — which is exactly what makes triggering reliable.
+  </p>
+
+  <div class="finding medium">
+    <span class="tag medium">medium</span><b class="title">The colon rule lives in three places.</b>
+    <p>
+      The "avoid colons in generated prose" house rule is stated in full in
+      <code>SKILL.md</code> (Step 4), <code>references/style-guidelines.md</code> (sentence
+      mechanics, with its own avoid/prefer table), and <code>references/self-check.md</code>
+      (two checklist items). Git history shows this exact rule has been tuned repeatedly
+      across recent commits — each tune currently requires three synchronized edits, and the
+      three statements have already started to phrase the exception list slightly differently.
+      Make <code>style-guidelines.md</code> the canonical statement and reduce the other two
+      to one-line pointers.
+    </p>
+  </div>
+
+  <div class="finding low">
+    <span class="tag low">low</span><b class="title">Hard reference to a Claude-only plugin in a dual-target skill.</b>
+    <p>
+      <code>SKILL.md</code> line 8 hands off to "the ARS <code>academic-paper</code> pipeline"
+      by name. ARS is a Claude Code plugin, but this skill also installs to Codex, where that
+      pipeline does not exist. Phrase the handoff neutrally ("say so and stop; a dedicated
+      research pipeline, if available, covers that workflow") or mark it as Claude-specific.
+    </p>
+  </div>
+
+  <div class="finding note">
+    <span class="tag note">note</span><b class="title">LaTeX-by-default in Revise mode is opinionated but fine.</b>
+    <p>
+      Step 4 produces LaTeX unless the surrounding file is clearly Markdown or plain prose.
+      Defensible for a thesis-centric workflow, and the escape hatch exists. No change needed —
+      just be aware it will occasionally LaTeX-ify a pasted plain-text paragraph when no file
+      context is present.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="patterns">
+  <h2><span class="no">§3</span> python-patterns</h2>
+  <p class="meta">410 lines, single file · solid defaults, two real issues</p>
+
+  <div class="finding medium">
+    <span class="tag medium">medium</span><b class="title">"Anti-Patterns to Avoid" shows the corrected code, not the anti-pattern.</b>
+    <p>
+      Every example in that section is the <em>fixed</em> version: the "Mutable default
+      argument" entry shows the <code>None</code>-sentinel idiom, "Catch the exception you
+      can handle" shows a correctly narrow <code>except</code>. A reader — or a model skimming
+      this skill mid-task — can plausibly parse these as the patterns to avoid. Either rename
+      the section ("Correct patterns for common pitfalls") or restructure as explicit
+      avoid → prefer pairs, the way <code>style-guidelines.md</code> does it.
+    </p>
+  </div>
+
+  <div class="finding medium">
+    <span class="tag medium">medium</span><b class="title">Typing guidance stops at Python 3.10 while the sibling skill defaults to 3.12.</b>
+    <p>
+      The skill teaches <code>TypeVar</code> + <code>typing.TypeAlias</code>, but
+      <code>python-tooling</code>'s template sets <code>requires-python = "&gt;=3.12"</code>.
+      On 3.12+, PEP 695 syntax is the modern form (<code>type JSON = ...</code>,
+      <code>def first[T](items: Sequence[T]) -&gt; T | None</code>), and
+      <code>typing.TypeAlias</code> is deprecated as of 3.12. Likewise
+      <code>datetime.UTC</code> (3.11+) reads better than
+      <code>timezone.utc</code> in the dataclass example. Add the 3.12+ forms as the default
+      and keep the older spellings as the noted fallback for projects on earlier floors.
+    </p>
+  </div>
+
+  <div class="finding note">
+    <span class="tag note">note</span><b class="title">Everything else holds up.</b>
+    <p>
+      Error-handling boundaries, logging ownership, EAFP guidance, concurrency model selection
+      with the "unbounded concurrency is a production bug" line, and the review checklist are
+      all accurate and well-calibrated. No other changes suggested.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="testing">
+  <h2><span class="no">§4</span> python-testing</h2>
+  <p class="meta">492 lines, single file · excellent content, nearly at the size ceiling</p>
+
+  <div class="finding medium">
+    <span class="tag medium">medium</span><b class="title">8 lines below the repo's own 500-line warning threshold.</b>
+    <p>
+      <code>scripts/check</code> warns at &gt;500 lines; this file is at 492, so the next
+      meaningful addition trips it. The skill already contains natural extraction candidates:
+      the SQLAlchemy savepoint recipe, the web-endpoint section, and the <code>mock_open</code>
+      example are niche, situational material. Move them to a <code>references/recipes.md</code>
+      (mirroring the scientific-writing-review layout) and the core file drops comfortably
+      to ~400 lines with room to grow.
+    </p>
+  </div>
+
+  <div class="finding low">
+    <span class="tag low">low</span><b class="title">Async examples mix strict-mode markers with auto-mode config.</b>
+    <p>
+      The section recommends <code>asyncio_mode = "auto"</code> for asyncio-only projects, but
+      both code examples then carry <code>@pytest.mark.asyncio</code> — unnecessary in auto
+      mode and required only in strict mode. Harmless, but the example contradicts the config
+      shown directly above it; label which mode each example assumes.
+    </p>
+  </div>
+
+  <div class="finding note">
+    <span class="tag note">note</span><b class="title">The behavior-vs-implementation guidance is the best part.</b>
+    <p>
+      "What To Test" / "Avoid implementation-detail tests" and the closing review checklist
+      ("Would a behavior-preserving refactor keep this test passing?") encode genuinely good
+      judgment that generic pytest references lack. The pytest 8.4 <code>check=</code>
+      parameter and the patch-where-it's-looked-up guidance are accurate.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="tooling">
+  <h2><span class="no">§5</span> python-tooling</h2>
+  <p class="meta">303 lines, single file · current and correct, minor config nits</p>
+
+  <div class="finding low">
+    <span class="tag low">low</span><b class="title">Two redundancies in the ruff config template.</b>
+    <p>
+      <code>extend-ignore</code> is used where plain <code>ignore</code> is the idiomatic key
+      (the <code>extend-</code> variants exist for layering on an <code>extend</code>ed base
+      config). And with <code>convention = "google"</code> set, ruff already disables the
+      pydocstyle rules that conflict with that convention, so the explicit <code>D203</code>
+      ignore is likely dead weight. Neither breaks anything; both make the template look less
+      authoritative than it is.
+    </p>
+  </div>
+
+  <div class="finding low">
+    <span class="tag low">low</span><b class="title">Version pins in examples will age out.</b>
+    <p>
+      <code>ruff&gt;=0.6.0</code> in the dependency group and the pinned
+      <code>rev:</code> tags (<code>nbstripout 0.9.1</code>, <code>pre-commit-hooks v6.0.0</code>)
+      are snapshots that drift stale. The skill already tells the reader to run
+      <code>pre-commit autoupdate</code>; consider dropping the floor versions from examples
+      entirely (<code>"ruff"</code>, <code>"ty"</code>) so the template never reads as outdated.
+    </p>
+  </div>
+
+  <div class="finding note">
+    <span class="tag note">note</span><b class="title">The ty section is appropriately hedged.</b>
+    <p>
+      Pre-1.0 status, lockfile pinning, incremental adoption via include/exclude, and the
+      <code>ty.toml</code>-precedence warning are all the right things to say about a
+      preview-stage type checker whose config schema is still moving.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="cross">
+  <h2><span class="no">§6</span> Cross-cutting</h2>
+
+  <div class="finding medium">
+    <span class="tag medium">medium</span><b class="title">python-tooling and python-testing disagree on the default pytest config.</b>
+    <p>
+      Tooling's <code>pyproject.toml</code> template bakes coverage into
+      <code>addopts = "--cov=mypackage --cov-report=term-missing"</code>; testing recommends
+      <code>addopts = ["--strict-markers", "--import-mode=importlib"]</code> and frames
+      coverage as deliberate policy, not a default flag. Testing has the better position —
+      <code>--cov</code> in <code>addopts</code> runs on every invocation, interferes with
+      debugger breakpoints, and contradicts the "coverage gates reflect risk" stance. Align
+      tooling's template with testing's, and let one skill own pytest config canonically while
+      the other points to it.
+    </p>
+  </div>
+
+  <div class="finding low">
+    <span class="tag low">low</span><b class="title">The three Python skill descriptions don't state when to trigger.</b>
+    <p>
+      Skill selection happens off the frontmatter description alone, and the writing-review
+      skill shows the winning pattern ("Use for… Not for…"). The Python descriptions are noun
+      phrases; python-patterns and python-testing keep their "use this when…" sentence in the
+      body, where the selector never sees it. Lift the trigger conditions into the
+      descriptions.
+    </p>
+  </div>
+
+  <div class="finding note">
+    <span class="tag note">note</span><b class="title">Scripts and workflow are in good shape.</b>
+    <p>
+      <code>scripts/check</code> enforces exactly what AGENTS.md promises (location,
+      frontmatter, targets, the 500-line nudge toward references/), installs are symlinks so
+      edits propagate without re-running install, and the plugin manifest keeps ARS external
+      instead of vendored — consistent with the stated policy.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="actions">
+  <h2><span class="no">§7</span> Recommended changes, in order</h2>
+  <ul class="actions">
+    <li>Fix the misleading "Anti-Patterns to Avoid" framing in <code>python-patterns</code> (rename or restructure as avoid → prefer pairs).</li>
+    <li>Align the two pytest <code>addopts</code> templates; drop <code>--cov</code> from <code>python-tooling</code>'s default config.</li>
+    <li>Add PEP 695 / 3.12-era typing syntax to <code>python-patterns</code> as the default form.</li>
+    <li>Extract the niche recipes from <code>python-testing</code> into <code>references/</code> before the 500-line warning fires.</li>
+    <li>Make <code>style-guidelines.md</code> the single canonical home of the colon rule; reduce the other two statements to pointers.</li>
+    <li>Lift trigger conditions ("Use when…") into the three Python skills' frontmatter descriptions.</li>
+    <li>Neutralize the ARS reference in <code>scientific-writing-review</code> for the Codex target; drop aging version pins from <code>python-tooling</code> examples; label async examples by pytest-asyncio mode.</li>
+  </ul>
+</section>
+
+<footer>
+  <span>Generated by Claude Code · skill audit of /Users/moritz/projects/ai-skills</span>
+  <span>2026-06-10</span>
+</footer>
+
+</div>
+</body>
+</html>

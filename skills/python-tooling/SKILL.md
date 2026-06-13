@@ -1,6 +1,6 @@
 ---
 name: python-tooling
-description: Modern Python project tooling — uv for environments and dependencies, ruff for linting and formatting, ty for type checking, and pyproject.toml configuration.
+description: Use when setting up, reviewing, or updating Python project tooling including uv environments and dependencies, ruff linting and formatting, ty type checking, pytest execution, CI, pre-commit, and pyproject.toml configuration.
 ---
 
 # Python Tooling
@@ -43,7 +43,8 @@ uv run ty check
 uv run ty check --watch
 
 # Testing
-uv run pytest --cov=mypackage --cov-report=html
+uv run pytest
+uv run pytest --cov=mypackage --cov-report=html  # when coverage is project policy
 
 # Dependency management (uv)
 uv sync               # install/sync the locked environment
@@ -99,10 +100,10 @@ dependencies = [
 # Managed with uv: `uv add --dev <pkg>` writes here.
 [dependency-groups]
 dev = [
-    "pytest>=8.0.0",
-    "pytest-cov>=5.0.0",
-    "ruff>=0.6.0",
+    "pytest",
+    "ruff",
     "ty",
+    # Add "pytest-cov" when coverage is project policy.
 ]
 
 [tool.ruff]
@@ -125,12 +126,11 @@ select = [
     "A",    # flake8-builtins (don't shadow list, dict, id, ...)
     "D",    # pydocstyle (enforce docstrings; see convention below)
 ]
-extend-ignore = [
+ignore = [
     "E501",    # line length (let the formatter handle wrapping)
     "A003",    # builtin as a class attribute is fine (e.g. model.id, .type)
     "D100",    # Missing docstring in public module
     "D104",    # Missing docstring in public package
-    "D203",    # blank line required before class docstring
     # "PD901",  # allow `df` as a DataFrame variable name
     # "PD011",  # .values false-positives on non-pandas objects
 ]
@@ -147,7 +147,10 @@ include = ["src", "tests"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--cov=mypackage --cov-report=term-missing"
+addopts = [
+    "--strict-markers",
+    "--import-mode=importlib",
+]
 ```
 
 ## Ruff: Lint and Format
@@ -229,12 +232,12 @@ separate mirror version to keep in sync with CI.
 repos:
   # Strip notebook outputs before committing
   - repo: https://github.com/kynan/nbstripout
-    rev: 0.9.1
+    rev: "<current-release>"
     hooks:
       - id: nbstripout
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v6.0.0
+    rev: "<current-release>"
     hooks:
       - id: check-yaml
       - id: check-toml
@@ -266,11 +269,10 @@ Two non-obvious details: the `ty` hook sets `pass_filenames: false` because `ty`
 analyzes the project as a whole rather than a file list, and the ruff hooks
 include `jupyter` in `types_or` so notebooks are linted and formatted too.
 
-Install the hooks once with `uv run pre-commit install`. When starting work on a
-project, run `uv run pre-commit autoupdate` to bump the pinned `rev:` tags of the
-remote hook repos (e.g. `nbstripout`, `pre-commit-hooks`) to their latest
-releases. The `repo: local` hooks aren't pinned here — they use the `ruff`/`ty`
-versions from the uv-managed environment, so bump those via `uv lock --upgrade`.
+Remote hooks require a `rev`; choose the current release when adding the hook,
+then keep it fresh with `uv run pre-commit autoupdate`. The `repo: local` hooks
+aren't pinned here — they use the `ruff`/`ty` versions from the uv-managed
+environment, so bump those via `uv lock --upgrade`.
 
 ## CI Sketch
 
@@ -280,7 +282,7 @@ uv sync --frozen
 uv run ruff check .
 uv run ruff format --check .
 uv run ty check
-uv run pytest --cov=mypackage
+uv run pytest
 ```
 
 ## Quick Reference

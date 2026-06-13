@@ -1,6 +1,6 @@
 ---
 name: python-patterns
-description: Context-aware Python idioms, type hints, packaging conventions, logging choices, error handling, concurrency, and maintainability guidance for writing, reviewing, and refactoring Python code.
+description: Use when writing, reviewing, or refactoring Python code for context-aware idioms, type hints, packaging conventions, logging choices, error handling, concurrency, and maintainability. Not for test-strategy or toolchain setup unless those are secondary to code design.
 ---
 
 # Python Development Patterns
@@ -26,15 +26,15 @@ prefer small, explicit code over clever abstractions.
 Annotate public function signatures, dataclasses, protocols, and complex return
 types. Avoid noisy annotations for obvious locals unless they clarify intent.
 
-Use modern built-in generics on Python 3.9+ and union syntax on Python 3.10+:
+Use modern built-in generics and union syntax. On Python 3.12+, prefer PEP
+695 type aliases and type parameters:
 
 ```python
-from collections.abc import Iterable, Mapping, Sequence
-from typing import TypeAlias, TypeVar
+from collections.abc import Mapping, Sequence
 
-JSON: TypeAlias = (
-    dict[str, "JSON"]
-    | list["JSON"]
+type JSON = (
+    dict[str, JSON]
+    | list[JSON]
     | str
     | int
     | float
@@ -42,9 +42,7 @@ JSON: TypeAlias = (
     | None
 )
 
-T = TypeVar("T")
-
-def first(items: Sequence[T]) -> T | None:
+def first[T](items: Sequence[T]) -> T | None:
     return items[0] if items else None
 
 def normalize_scores(scores: Mapping[str, float]) -> dict[str, float]:
@@ -54,9 +52,14 @@ def normalize_scores(scores: Mapping[str, float]) -> dict[str, float]:
     return {name: score / total for name, score in scores.items()}
 ```
 
+On projects below Python 3.12, use `JSON: TypeAlias = ...`,
+`T = TypeVar("T")`, and `def first(items: Sequence[T]) -> T | None`.
+
 Prefer abstract input types when callers can pass many concrete containers:
 
 ```python
+from collections.abc import Iterable
+
 def send_all(messages: Iterable[str]) -> None:
     for message in messages:
         send(message)
@@ -70,6 +73,7 @@ Use protocols for structural interfaces instead of inheritance when behavior is
 all that matters.
 
 ```python
+from collections.abc import Iterable
 from typing import Protocol
 
 class Renderable(Protocol):
@@ -81,17 +85,14 @@ def render_all(items: Iterable[Renderable]) -> str:
 
 ### Decorator Typing
 
-Use `ParamSpec` for decorators that preserve a wrapped function's signature.
+Use parameter syntax for decorators that preserve a wrapped function's
+signature.
 
 ```python
 from collections.abc import Callable
 from functools import wraps
-from typing import ParamSpec, TypeVar
 
-P = ParamSpec("P")
-R = TypeVar("R")
-
-def traced(func: Callable[P, R]) -> Callable[P, R]:
+def traced[**P, R](func: Callable[P, R]) -> Callable[P, R]:
     @wraps(func)
     def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
         logger.debug("calling %s", func.__name__)
@@ -99,6 +100,9 @@ def traced(func: Callable[P, R]) -> Callable[P, R]:
 
     return wrapper
 ```
+
+On projects below Python 3.12, import `ParamSpec` and `TypeVar`, then declare
+`P = ParamSpec("P")` and `R = TypeVar("R")` before the decorator.
 
 ## Error Handling
 
@@ -256,7 +260,7 @@ value objects and `slots=True` when many instances make memory relevant.
 
 ```python
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 @dataclass(frozen=True, slots=True)
 class UserId:
@@ -270,8 +274,11 @@ class UserId:
 class User:
     id: UserId
     email: str
-    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
 ```
+
+Use `timezone.utc` instead of `UTC` only when supporting Python earlier than
+3.11.
 
 Use `NamedTuple` or a frozen dataclass for small immutable records. Use
 validation libraries already present in the project, such as Pydantic or attrs,
@@ -369,7 +376,9 @@ seen = {user.id for user in users}
 missing = [user_id for user_id in requested_ids if user_id not in seen]
 ```
 
-## Anti-Patterns to Avoid
+## Correct Patterns for Common Pitfalls
+
+The examples below are the preferred forms, not examples to avoid.
 
 ```python
 # Mutable default argument

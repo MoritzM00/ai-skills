@@ -1,6 +1,6 @@
 ---
 name: python-testing
-description: Python testing strategies using pytest, TDD methodology, fixtures, mocking, parametrization, async tests, property-based tests, and coverage policy.
+description: Use when writing, reviewing, or improving Python tests with pytest, TDD, fixtures, mocking, parametrization, async tests, property-based tests, and coverage policy. Not for general Python idioms or project toolchain setup except where tests are involved.
 ---
 
 # Python Testing Patterns
@@ -301,18 +301,9 @@ def test_create_user():
     repo.save.assert_called_once()
 ```
 
-Use `mock_open` only when the test should avoid real filesystem I/O. Prefer
-`tmp_path` when real file behavior matters.
-
-```python
-from unittest.mock import mock_open, patch
-
-
-@patch("builtins.open", new_callable=mock_open, read_data="file content")
-def test_file_reading(mock_file):
-    assert read_file("test.txt") == "file content"
-    mock_file.assert_called_once_with("test.txt", "r")
-```
+For situational patterns such as `mock_open`, SQLAlchemy savepoints, and
+framework test clients, read `references/recipes.md` only when the task needs
+that specific recipe.
 
 ## Async Tests
 
@@ -326,26 +317,27 @@ multiple async test plugins, such as trio and asyncio, need to coexist.
 asyncio_mode = "auto"
 ```
 
+In auto mode, async fixtures and tests do not need strict-mode markers:
+
 ```python
 import pytest
-import pytest_asyncio
 
 
-@pytest_asyncio.fixture
+@pytest.fixture
 async def async_client():
     app = create_app()
     async with app.test_client() as client:
         yield client
 
 
-@pytest.mark.asyncio
 async def test_api_endpoint(async_client):
     response = await async_client.get("/api/data")
     assert response.status_code == 200
 ```
 
 `patch()` creates an `AsyncMock` automatically when the patched target is an
-async function:
+async function. In strict mode, mark async tests and use
+`@pytest_asyncio.fixture` for async fixtures:
 
 ```python
 import pytest
@@ -411,71 +403,6 @@ coverage html
 
 pytest --cov=mypackage --cov-branch --cov-report=term-missing --cov-report=html
 pytest --cov=mypackage --cov-fail-under=80
-```
-
-## Database Tests
-
-For SQLAlchemy 2.x ORM tests where application code may call `Session.commit()`,
-bind the session to an external transaction and use
-`join_transaction_mode="create_savepoint"`. The outer transaction is rolled back
-after the test.
-
-```python
-import pytest
-from sqlalchemy.orm import Session
-
-
-@pytest.fixture
-def db_session(engine):
-    connection = engine.connect()
-    transaction = connection.begin()
-    session = Session(bind=connection, join_transaction_mode="create_savepoint")
-
-    try:
-        yield session
-    finally:
-        session.close()
-        transaction.rollback()
-        connection.close()
-
-
-def test_create_user(db_session):
-    user = User(name="Alice", email="alice@example.com")
-    db_session.add(user)
-    db_session.commit()
-
-    retrieved = db_session.query(User).filter_by(name="Alice").first()
-    assert retrieved.email == "alice@example.com"
-```
-
-This recipe relies on reliable SAVEPOINT support from the database and driver.
-If SAVEPOINTs are unreliable, avoid commits in tests or recreate isolated test
-databases instead.
-
-## Web Endpoint Tests
-
-Use the framework's test client rather than live network calls for app-local
-endpoints. Example for Flask-style clients:
-
-```python
-import pytest
-
-
-@pytest.fixture
-def client():
-    app = create_app(testing=True)
-    with app.test_client() as client:
-        yield client
-
-
-def test_create_user(client):
-    response = client.post(
-        "/api/users",
-        json={"name": "Alice", "email": "alice@example.com"},
-    )
-
-    assert response.status_code == 201
-    assert response.json["name"] == "Alice"
 ```
 
 ## Review Checklist
