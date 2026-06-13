@@ -26,6 +26,11 @@ prefer small, explicit code over clever abstractions.
 Annotate public function signatures, dataclasses, protocols, and complex return
 types. Avoid noisy annotations for obvious locals unless they clarify intent.
 
+Import collection interfaces from `collections.abc`, not `typing`, when the
+runtime ABC exists: `Iterable`, `Iterator`, `Sequence`, `Mapping`,
+`MutableMapping`, and `Callable`. Reserve `typing` for type-system constructs
+such as `Protocol`, `TypedDict`, `Literal`, `overload`, and `Self`.
+
 Use modern built-in generics and union syntax. On Python 3.12+, prefer PEP
 695 type aliases and type parameters:
 
